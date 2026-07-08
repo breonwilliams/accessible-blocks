@@ -61,7 +61,28 @@ jobs:
         with:
           build-dir: '.'
 
-  # Phase 2+: PHPUnit (dynamic render tests) — added when the first
-  # dynamic block lands, using wp-env for a WordPress test environment.
-  #
-  # Phase 3+: Playwright editor E2E (@wordpress/e2e-test-utils-playwright).
+  e2e:
+    name: E2E — Playwright + wp-env
+    runs-on: ubuntu-latest
+    needs: js
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: Start WordPress (wp-env)
+        run: npm run env:start
+      - name: Run E2E tests
+        run: npm run test:e2e
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: artifacts/
+          if-no-files-found: ignore
