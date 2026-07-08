@@ -118,6 +118,26 @@ if ( ! function_exists( 'get_block_wrapper_attributes' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wp_unique_id' ) ) {
+	/**
+	 * @param string $prefix Prefix.
+	 */
+	function wp_unique_id( string $prefix = '' ): string {
+		static $counter = 0;
+		++$counter;
+		return $prefix . $counter;
+	}
+}
+
+if ( ! function_exists( 'wp_json_encode' ) ) {
+	/**
+	 * @param mixed $value Value.
+	 */
+	function wp_json_encode( $value ): string {
+		return (string) json_encode( $value ); // phpcs:ignore
+	}
+}
+
 if ( ! function_exists( 'wp_get_global_settings' ) ) {
 	/**
 	 * @param array $path Settings path.

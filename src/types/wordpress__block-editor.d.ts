@@ -28,6 +28,12 @@ declare module '@wordpress/block-editor' {
 		children?: ReactNode;
 	} >;
 
+	export const InnerBlocks: ComponentType< {
+		children?: ReactNode;
+	} > & {
+		Content: ComponentType;
+	};
+
 	export const useBlockProps: {
 		( props?: Record< string, unknown > ): BlockDOMProps;
 		save( props?: Record< string, unknown > ): BlockDOMProps;

@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "accessible-blocks/accordion",
+	"version": "0.1.0",
+	"title": "Accessible Accordion",
+	"category": "design",
+	"icon": "menu-alt3",
+	"description": "Expandable content panels with correct disclosure semantics and full keyboard support built in — Enter/Space to toggle, arrow keys to move between headers, screen-reader announcements for free.",
+	"keywords": [ "accordion", "faq", "toggle", "collapse", "accessible" ],
+	"textdomain": "accessible-blocks",
+	"attributes": {},
+	"usesContext": [ "accessible-blocks/headingLevel" ],
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": [ "wide" ],
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": true
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"viewScriptModule": "file:./view.js"
+}

@@ -6,8 +6,8 @@
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"scripts": {
-		"build": "wp-scripts build --blocks-manifest",
-		"start": "wp-scripts start --blocks-manifest",
+		"build": "wp-scripts build --experimental-modules --blocks-manifest",
+		"start": "wp-scripts start --experimental-modules --blocks-manifest",
 		"format": "wp-scripts format",
 		"lint:js": "wp-scripts lint-js",
 		"lint:style": "wp-scripts lint-style",
@@ -28,6 +28,7 @@
 		"@wordpress/components": "^36.1.0",
 		"@wordpress/element": "^8.2.0",
 		"@wordpress/i18n": "^6.23.0",
+		"@wordpress/interactivity": "^6.50.0",
 		"@wordpress/scripts": "^30.0.0",
 		"typescript": "^5.5.0"
 	}

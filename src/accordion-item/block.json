@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "accessible-blocks/accordion-item",
+	"version": "0.1.0",
+	"title": "Accordion Item",
+	"category": "design",
+	"icon": "arrow-down-alt2",
+	"description": "One expandable panel inside an Accessible Accordion. The header is a real button inside a correctly-leveled heading; the panel is a labeled region.",
+	"keywords": [ "accordion", "panel", "toggle" ],
+	"textdomain": "accessible-blocks",
+	"parent": [ "accessible-blocks/accordion" ],
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"usesContext": [ "accessible-blocks/headingLevel" ],
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}
