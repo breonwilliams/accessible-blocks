@@ -22,8 +22,24 @@ import type { BlockEditProps } from '@wordpress/blocks';
 import {
 	parseColor,
 	pickAccessibleForeground,
+	toHex,
 	type PaletteColor,
 } from '../utils/contrast';
+
+/**
+ * Canonical form for comparing CSS colors: parsed hex when possible
+ * (ColorPalette may normalize case/format of the value it returns),
+ * else the trimmed original.
+ *
+ * @param color CSS color string.
+ */
+function canonicalColor( color?: string ): string {
+	if ( ! color ) {
+		return '';
+	}
+	const parsed = parseColor( color );
+	return parsed ? toHex( parsed ) : color.trim().toLowerCase();
+}
 
 // A type alias (not an interface) so it structurally satisfies the
 // Record< string, unknown > constraint on BlockEditProps.
@@ -127,8 +143,9 @@ export default function Edit( {
 						colors={ verifiablePalette }
 						value={ background?.color }
 						onChange={ ( newColor ) => {
+							const target = canonicalColor( newColor );
 							const match = palette.find(
-								( c ) => c.color === newColor
+								( c ) => canonicalColor( c.color ) === target
 							);
 							setAttributes( {
 								backgroundSlug: match?.slug ?? '',
