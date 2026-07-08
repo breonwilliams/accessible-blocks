@@ -43,6 +43,7 @@ jobs:
           tools: composer
       - run: composer install --no-interaction --no-progress
       - run: composer run lint:php
+      - run: composer run test:php
 
   plugin-check:
     name: Plugin Check

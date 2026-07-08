@@ -26,6 +26,7 @@
 		"@wordpress/block-editor": "^15.23.0",
 		"@wordpress/blocks": "^15.23.0",
 		"@wordpress/components": "^36.1.0",
+		"@wordpress/element": "^8.2.0",
 		"@wordpress/i18n": "^6.23.0",
 		"@wordpress/scripts": "^30.0.0",
 		"typescript": "^5.5.0"

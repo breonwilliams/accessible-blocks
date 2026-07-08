@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "accessible-blocks/heading",
+	"version": "0.1.0",
+	"title": "Accessible Heading",
+	"category": "text",
+	"icon": "heading",
+	"description": "A heading whose level (H2–H6) is set automatically from where it sits in your section structure. You write the words; the correct level is guaranteed — even after reordering.",
+	"keywords": [ "heading", "title", "subtitle", "accessible", "outline" ],
+	"textdomain": "accessible-blocks",
+	"attributes": {
+		"content": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"usesContext": [ "accessible-blocks/headingLevel" ],
+	"supports": {
+		"html": false,
+		"typography": {
+			"fontSize": true
+		}
+	},
+	"example": {
+		"attributes": {
+			"content": "A heading that can't break your outline"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

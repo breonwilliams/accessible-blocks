@@ -7,6 +7,9 @@
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/build/*</exclude-pattern>
+	<!-- PHPUnit tests follow PHPUnit conventions (camelCase, PSR classes),
+	     not WPCS; shipped plugin code is what the ruleset guards. -->
+	<exclude-pattern>*/tests/*</exclude-pattern>
 
 	<arg name="extensions" value="php"/>
 	<arg name="colors"/>
