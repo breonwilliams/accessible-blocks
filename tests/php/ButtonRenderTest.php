@@ -43,13 +43,13 @@ final class ButtonRenderTest extends TestCase {
 			)
 		);
 
-		$this->assertStringContainsString( '<a class="ab-button" href="https://example.com"', $html );
+		$this->assertStringContainsString( '<a class="ab-button wp-element-button" href="https://example.com"', $html );
 	}
 
 	public function test_renders_span_without_url(): void {
 		$html = $this->render( array( 'text' => 'Go' ) );
 
-		$this->assertStringContainsString( '<span class="ab-button"', $html );
+		$this->assertStringContainsString( '<span class="ab-button wp-element-button"', $html );
 		$this->assertStringNotContainsString( '<a ', $html );
 	}
 

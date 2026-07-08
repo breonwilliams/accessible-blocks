@@ -160,7 +160,7 @@ export default function Edit( {
 			<div { ...blockProps }>
 				<RichText
 					tagName="span"
-					className="ab-button"
+					className="ab-button wp-element-button"
 					style={ buttonStyle }
 					value={ text }
 					onChange={ ( newText ) =>

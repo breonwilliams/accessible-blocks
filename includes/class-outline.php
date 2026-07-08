@@ -68,7 +68,7 @@ class Outline {
 		$anchor = 'ab-' . $slug;
 
 		if ( isset( self::$used_anchors[ $anchor ] ) ) {
-			self::$used_anchors[ $anchor ]++;
+			++self::$used_anchors[ $anchor ];
 			return $anchor . '-' . self::$used_anchors[ $anchor ];
 		}
 
@@ -94,9 +94,9 @@ class Outline {
 	/**
 	 * Recursive walker.
 	 *
-	 * @param array      $blocks        Parsed blocks.
-	 * @param int|null   $context_level Level provided by the nearest Section.
-	 * @param array<string,int> $registry Anchor registry (by reference).
+	 * @param array             $blocks        Parsed blocks.
+	 * @param int|null          $context_level Level provided by the nearest Section.
+	 * @param array<string,int> $registry      Anchor registry (by reference).
 	 */
 	private static function walk( array $blocks, ?int $context_level, array &$registry ): array {
 		$entries = array();
@@ -195,7 +195,7 @@ class Outline {
 		$anchor = 'ab-' . $slug;
 
 		if ( isset( $registry[ $anchor ] ) ) {
-			$registry[ $anchor ]++;
+			++$registry[ $anchor ];
 			return $anchor . '-' . $registry[ $anchor ];
 		}
 

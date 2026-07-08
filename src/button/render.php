@@ -53,8 +53,12 @@ $accessible_blocks_tag  = '' !== $accessible_blocks_url ? 'a' : 'span';
 $accessible_blocks_href = '' !== $accessible_blocks_url ? sprintf( ' href="%s"', esc_url( $accessible_blocks_url ) ) : '';
 
 // $accessible_blocks_href is pre-escaped above; everything else is escaped inline.
+// wp-element-button inherits the theme's button styling (theme.json
+// elements.button), so an uncolored button still *looks* like a button —
+// matching core's own Button block. Author-chosen palette colors override
+// it with the contrast-validated pairing.
 printf(
-	'<div %1$s><%2$s class="ab-button"%3$s%4$s>%5$s</%2$s></div>',
+	'<div %1$s><%2$s class="ab-button wp-element-button"%3$s%4$s>%5$s</%2$s></div>',
 	$accessible_blocks_wrapper, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	tag_escape( $accessible_blocks_tag ),
 	$accessible_blocks_href, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Built with esc_url() above.

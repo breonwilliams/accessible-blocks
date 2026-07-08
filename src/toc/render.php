@@ -52,9 +52,11 @@ $accessible_blocks_build_list = static function ( array $entries ): string {
 			$html   .= '<ol class="ab-toc__list">';
 			$stack[] = $level;
 		} else {
-			$html .= '</li>';
-			while ( count( $stack ) > 1 && end( $stack ) > $level ) {
+			$html       .= '</li>';
+			$stack_depth = count( $stack );
+			while ( $stack_depth > 1 && end( $stack ) > $level ) {
 				array_pop( $stack );
+				--$stack_depth;
 				$html .= '</ol></li>';
 			}
 		}
@@ -68,9 +70,11 @@ $accessible_blocks_build_list = static function ( array $entries ): string {
 		$prev = $level;
 	}
 
-	$html .= '</li>';
-	while ( count( $stack ) > 1 ) {
+	$html       .= '</li>';
+	$stack_depth = count( $stack );
+	while ( $stack_depth > 1 ) {
 		array_pop( $stack );
+		--$stack_depth;
 		$html .= '</ol></li>';
 	}
 	$html .= '</ol>';
