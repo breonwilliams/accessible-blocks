@@ -206,6 +206,7 @@ if ( ! function_exists( 'wp_get_global_settings' ) ) {
 }
 
 require_once ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/includes/class-contrast.php';
+require_once ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/includes/class-outline.php';
 
 /**
  * Render a block template file the way WordPress does: with $attributes,
