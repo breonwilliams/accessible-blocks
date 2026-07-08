@@ -129,6 +129,33 @@ final class OutlineTest extends TestCase {
 		$this->assertSame( 'ab-overview-2', $entries[1]['anchor'] );
 	}
 
+	public function test_card_and_accordion_titles_nest_one_deeper(): void {
+		$entries = Outline::collect(
+			array(
+				self::section(
+					self::heading( 'Features' ),
+					self::block(
+						'accessible-blocks/card-grid',
+						array(),
+						array(
+							self::block( 'accessible-blocks/card', array(), array( self::heading( 'Card title' ) ) ),
+						)
+					),
+					self::block(
+						'accessible-blocks/accordion',
+						array(),
+						array(
+							self::block( 'accessible-blocks/accordion-item', array( 'title' => 'Question?' ) ),
+						)
+					)
+				),
+			)
+		);
+
+		$this->assertSame( array( 2, 3, 3 ), array_column( $entries, 'level' ) );
+		$this->assertSame( array( 'Features', 'Card title', 'Question?' ), array_column( $entries, 'text' ) );
+	}
+
 	public function test_empty_headings_are_skipped(): void {
 		$entries = Outline::collect(
 			array( self::section( self::heading( '   ' ), self::heading( 'Real' ) ) )

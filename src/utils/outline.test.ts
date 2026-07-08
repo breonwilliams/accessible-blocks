@@ -136,6 +136,30 @@ describe( 'collectOutline', () => {
 		expect( after[ 1 ]!.level ).toBe( 2 );
 	} );
 
+	it( 'card and accordion titles nest one deeper than the section heading', () => {
+		const tree = [
+			section(
+				heading( 'Features' ),
+				block( 'accessible-blocks/card-grid', {}, [
+					block( 'accessible-blocks/card', {}, [
+						heading( 'Card title' ),
+					] ),
+				] ),
+				block( 'accessible-blocks/accordion', {}, [
+					block( 'accessible-blocks/accordion-item', {
+						title: 'Question?',
+					} ),
+				] )
+			),
+		];
+		const outline = collectOutline( tree );
+		expect( outline.map( ( e ) => [ e.level, e.text ] ) ).toEqual( [
+			[ 2, 'Features' ],
+			[ 3, 'Card title' ],
+			[ 3, 'Question?' ],
+		] );
+	} );
+
 	it( 'strips markup from heading text and skips non-heading blocks', () => {
 		const tree = [
 			section(

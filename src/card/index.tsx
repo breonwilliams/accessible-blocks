@@ -1,19 +1,48 @@
 /**
- * Card — registration (edit + save co-located; the card is a semantic
- * article whose title block derives its level from section context).
+ * Card — registration + components.
+ *
+ * A card is a semantic subsection: its title (an Accessible Heading) sits
+ * one level deeper than the surrounding section's heading. The card
+ * derives and provides that level exactly like Section does, with the
+ * same self-healing on reorder.
  */
-import { registerBlockType, type BlockConfiguration } from '@wordpress/blocks';
+import { useEffect } from '@wordpress/element';
+import {
+	registerBlockType,
+	type BlockConfiguration,
+	BlockEditProps,
+} from '@wordpress/blocks';
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
+import { deriveSectionLevel, HEADING_LEVEL_CONTEXT } from '../utils/outline';
 import metadata from './block.json';
 import './style.scss';
+
+type CardAttributes = {
+	headingLevel: number;
+};
+
+type CardEditProps = BlockEditProps< CardAttributes > & {
+	context: Record< string, unknown >;
+};
 
 const TEMPLATE: Array< [ string, Record< string, unknown >? ] > = [
 	[ 'accessible-blocks/heading' ],
 	[ 'core/paragraph' ],
 ];
 
-function Edit() {
+function Edit( { attributes, setAttributes, context }: CardEditProps ) {
+	const parentLevel = context[ HEADING_LEVEL_CONTEXT ];
+	const derived = deriveSectionLevel(
+		typeof parentLevel === 'number' ? parentLevel : null
+	);
+
+	useEffect( () => {
+		if ( attributes.headingLevel !== derived ) {
+			setAttributes( { headingLevel: derived } );
+		}
+	}, [ derived, attributes.headingLevel, setAttributes ] );
+
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		template: TEMPLATE,
@@ -28,8 +57,8 @@ function save() {
 	return <article { ...innerBlocksProps } />;
 }
 
-registerBlockType(
-	metadata as unknown as BlockConfiguration< Record< string, unknown > >,
+registerBlockType< CardAttributes >(
+	metadata as unknown as BlockConfiguration< CardAttributes >,
 	{
 		edit: Edit,
 		save,

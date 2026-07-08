@@ -101,12 +101,38 @@ class Outline {
 	private static function walk( array $blocks, ?int $context_level, array &$registry ): array {
 		$entries = array();
 
+		// Blocks whose children's headings sit one level deeper (mirrors
+		// LEVEL_PROVIDER_BLOCKS in outline.ts).
+		$level_providers = array(
+			'accessible-blocks/section',
+			'accessible-blocks/card',
+			'accessible-blocks/accordion',
+		);
+
 		foreach ( $blocks as $block ) {
 			$name = $block['blockName'] ?? '';
 
-			if ( 'accessible-blocks/section' === $name ) {
+			if ( in_array( $name, $level_providers, true ) ) {
 				$provided = null === $context_level ? self::MIN_LEVEL : self::clamp_level( $context_level + 1 );
 				$entries  = array_merge( $entries, self::walk( $block['innerBlocks'] ?? array(), $provided, $registry ) );
+				continue;
+			}
+
+			if ( 'accessible-blocks/accordion-item' === $name ) {
+				$text = wp_strip_all_tags( (string) ( $block['attrs']['title'] ?? '' ) );
+
+				if ( '' !== trim( $text ) ) {
+					$entries[] = array(
+						'level'  => self::clamp_level( $context_level ?? self::MIN_LEVEL ),
+						'text'   => trim( $text ),
+						// Item ids are per-render unique; not reliably
+						// linkable from a ToC.
+						'anchor' => '',
+						'source' => 'derived',
+					);
+				}
+
+				$entries = array_merge( $entries, self::walk( $block['innerBlocks'] ?? array(), $context_level, $registry ) );
 				continue;
 			}
 

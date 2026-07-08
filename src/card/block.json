@@ -10,7 +10,15 @@
 	"keywords": [ "card", "feature", "tile" ],
 	"textdomain": "accessible-blocks",
 	"parent": [ "accessible-blocks/card-grid" ],
-	"attributes": {},
+	"attributes": {
+		"headingLevel": {
+			"type": "number",
+			"default": 3
+		}
+	},
+	"providesContext": {
+		"accessible-blocks/headingLevel": "headingLevel"
+	},
 	"usesContext": [ "accessible-blocks/headingLevel" ],
 	"supports": {
 		"html": false,

@@ -16,6 +16,18 @@ export const HEADING_LEVEL_CONTEXT = 'accessible-blocks/headingLevel';
 export const SECTION_BLOCK = 'accessible-blocks/section';
 export const HEADING_BLOCK = 'accessible-blocks/heading';
 export const CORE_HEADING_BLOCK = 'core/heading';
+export const ACCORDION_ITEM_BLOCK = 'accessible-blocks/accordion-item';
+
+/**
+ * Blocks that provide a heading level one deeper than their context:
+ * Sections (obviously), plus Cards and Accordions — their titles are
+ * semantically subsections of the surrounding section's heading.
+ */
+export const LEVEL_PROVIDER_BLOCKS = [
+	SECTION_BLOCK,
+	'accessible-blocks/card',
+	'accessible-blocks/accordion',
+];
 
 /**
  * The document's H1 is the post/page title, so derived heading content
@@ -122,9 +134,24 @@ export function collectOutline(
 	const entries: OutlineEntry[] = [];
 
 	for ( const block of blocks ) {
-		if ( block.name === SECTION_BLOCK ) {
+		if ( LEVEL_PROVIDER_BLOCKS.includes( block.name ) ) {
 			const provided = deriveSectionLevel( contextLevel );
 			entries.push( ...collectOutline( block.innerBlocks, provided ) );
+			continue;
+		}
+
+		if ( block.name === ACCORDION_ITEM_BLOCK ) {
+			// The item's title renders as a real heading (with a button
+			// inside); its panel content shares the item's context.
+			entries.push( {
+				clientId: block.clientId,
+				level: clampHeadingLevel( contextLevel ?? MIN_HEADING_LEVEL ),
+				text: toPlainText( block.attributes.title ),
+				source: 'derived',
+			} );
+			entries.push(
+				...collectOutline( block.innerBlocks, contextLevel )
+			);
 			continue;
 		}
 

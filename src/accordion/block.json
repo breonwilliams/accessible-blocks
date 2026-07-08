@@ -9,7 +9,15 @@
 	"description": "Expandable content panels with correct disclosure semantics and full keyboard support built in — Enter/Space to toggle, arrow keys to move between headers, screen-reader announcements for free.",
 	"keywords": [ "accordion", "faq", "toggle", "collapse", "accessible" ],
 	"textdomain": "accessible-blocks",
-	"attributes": {},
+	"attributes": {
+		"headingLevel": {
+			"type": "number",
+			"default": 3
+		}
+	},
+	"providesContext": {
+		"accessible-blocks/headingLevel": "headingLevel"
+	},
 	"usesContext": [ "accessible-blocks/headingLevel" ],
 	"supports": {
 		"html": false,
