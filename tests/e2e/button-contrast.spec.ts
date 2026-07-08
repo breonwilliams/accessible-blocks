@@ -19,7 +19,16 @@ test.describe( 'Accessible Button contrast enforcement', () => {
 			attributes: { text: 'Get started' },
 		} );
 
-		await editor.openDocumentSettingsSidebar();
+		// Open the settings sidebar only if it isn't already (the utility
+		// helper times out when a fresh profile opens with it visible).
+		const settingsToggle = page
+			.getByRole( 'button', { name: 'Settings', exact: true } )
+			.first();
+		if (
+			( await settingsToggle.getAttribute( 'aria-pressed' ) ) !== 'true'
+		) {
+			await settingsToggle.click();
+		}
 
 		// The color options are palette swatches — no custom color input.
 		const swatches = page.locator(

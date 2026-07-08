@@ -14,6 +14,10 @@
  * @package AccessibleBlocks
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $accessible_blocks_post_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
 $accessible_blocks_post    = $accessible_blocks_post_id ? get_post( $accessible_blocks_post_id ) : null;
 

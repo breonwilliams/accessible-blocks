@@ -15,6 +15,10 @@
  * @package AccessibleBlocks
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $accessible_blocks_text = isset( $attributes['text'] ) ? trim( (string) $attributes['text'] ) : '';
 
 if ( '' === $accessible_blocks_text ) {

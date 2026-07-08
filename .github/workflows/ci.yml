@@ -38,7 +38,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          # Dev tooling runs on current PHP (the lockfile resolves against
+          # it); the plugin's PHP 8.0 floor is enforced by the
+          # PHPCompatibilityWP sniffs in phpcs.xml.dist.
+          php-version: '8.4'
           coverage: none
           tools: composer
       - run: composer install --no-interaction --no-progress
@@ -56,10 +59,16 @@ jobs:
           name: build
           path: build/
         continue-on-error: true
+      - name: Stage distributable plugin
+        # Plugin Check must see what ships to WordPress.org — not dev
+        # files (tests, src, configs). Mirrors the plugin-zip file list.
+        run: |
+          mkdir dist-plugin
+          cp -r accessible-blocks.php readme.txt includes build dist-plugin/
       - name: Run Plugin Check
         uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: '.'
+          build-dir: './dist-plugin'
 
   e2e:
     name: E2E — Playwright + wp-env

@@ -14,6 +14,10 @@
  * @package AccessibleBlocks
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( '' === trim( (string) $content ) ) {
 	return;
 }

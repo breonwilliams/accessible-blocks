@@ -20,6 +20,10 @@
  * @package AccessibleBlocks
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $accessible_blocks_media_id = isset( $attributes['mediaId'] ) ? (int) $attributes['mediaId'] : 0;
 
 if ( ! $accessible_blocks_media_id || ! wp_attachment_is_image( $accessible_blocks_media_id ) ) {
