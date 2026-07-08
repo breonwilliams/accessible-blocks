@@ -62,13 +62,15 @@ jobs:
       - name: Stage distributable plugin
         # Plugin Check must see what ships to WordPress.org — not dev
         # files (tests, src, configs). Mirrors the plugin-zip file list.
+        # The directory name becomes the plugin slug Plugin Check validates
+        # against, so it must match the text domain.
         run: |
-          mkdir dist-plugin
-          cp -r accessible-blocks.php readme.txt includes build dist-plugin/
+          mkdir -p dist/accessible-blocks
+          cp -r accessible-blocks.php readme.txt includes build dist/accessible-blocks/
       - name: Run Plugin Check
         uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: './dist-plugin'
+          build-dir: './dist/accessible-blocks'
 
   e2e:
     name: E2E — Playwright + wp-env
