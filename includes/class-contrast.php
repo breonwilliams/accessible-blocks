@@ -244,8 +244,22 @@ class Contrast {
 			return $best;
 		}
 
-		$black_ratio = self::contrast_ratio( array( 'r' => 0, 'g' => 0, 'b' => 0 ), $bg );
-		$white_ratio = self::contrast_ratio( array( 'r' => 255, 'g' => 255, 'b' => 255 ), $bg );
+		$black_ratio = self::contrast_ratio(
+			array(
+				'r' => 0,
+				'g' => 0,
+				'b' => 0,
+			),
+			$bg
+		);
+		$white_ratio = self::contrast_ratio(
+			array(
+				'r' => 255,
+				'g' => 255,
+				'b' => 255,
+			),
+			$bg
+		);
 
 		if ( $black_ratio >= $white_ratio ) {
 			return array(
