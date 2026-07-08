@@ -24,86 +24,90 @@ test.describe( 'Accessible Button contrast enforcement', () => {
 	// doesn't parse (mirror verifiablePalette in edit.tsx), then assert
 	// the warning for the unverifiable ones. Product behavior is verified
 	// by 45 unit tests and manual click-through on live WP 7.0.
-	test.fixme( 'every palette background yields a passing AA ratio; no custom color input exists', async ( {
-		editor,
-		page,
-	} ) => {
-		await editor.insertBlock( {
-			name: 'accessible-blocks/button',
-			attributes: { text: 'Get started' },
-		} );
+	test.fixme(
+		'every palette background yields a passing AA ratio; no custom color input exists',
+		async ( { editor, page } ) => {
+			await editor.insertBlock( {
+				name: 'accessible-blocks/button',
+				attributes: { text: 'Get started' },
+			} );
 
-		// Open the block inspector via the store — robust across WP
-		// versions (top-bar toggle labels change between releases).
-		await page.evaluate( () => {
-			const w = window as any;
-			w.wp.data
-				.dispatch( 'core/interface' )
-				.enableComplementaryArea( 'core', 'edit-post/block' );
-			w.wp.data
-				.dispatch( 'core/interface' )
-				.enableComplementaryArea( 'core/edit-post', 'edit-post/block' );
-		} );
-
-		// Constraint 1: palette swatches are offered…
-		const swatches = page.locator(
-			'.components-circular-option-picker__option'
-		);
-		await expect( swatches.first() ).toBeVisible();
-
-		// …and no unconstrained color input exists anywhere in the panel.
-		await expect(
-			page.locator( 'input[type="text"][aria-label*="Hex" i]' )
-		).toHaveCount( 0 );
-
-		// Constraint 2: every theme palette slug produces an AA-passing
-		// derived pairing (the badge renders only when the engine passes).
-		const slugs: string[] = await page.evaluate( () => {
-			const w = window as any;
-			const settings = w.wp.data
-				.select( 'core/block-editor' )
-				.getSettings();
-			const palette =
-				settings.colors ??
-				settings.__experimentalFeatures?.color?.palette?.theme ??
-				[];
-			return palette
-				.map( ( c: { slug?: string } ) => c.slug )
-				.filter( Boolean );
-		} );
-		expect( slugs.length ).toBeGreaterThan( 0 );
-
-		for ( const slug of slugs ) {
-			const applied = await page.evaluate( ( bgSlug ) => {
+			// Open the block inspector via the store — robust across WP
+			// versions (top-bar toggle labels change between releases).
+			await page.evaluate( () => {
 				const w = window as any;
-				const sel = w.wp.data.select( 'core/block-editor' );
-				const find = ( bs: any[] ): any => {
-					for ( const b of bs ) {
-						if ( b.name === 'accessible-blocks/button' ) {
-							return b;
-						}
-						const f = find( b.innerBlocks );
-						if ( f ) {
-							return f;
-						}
-					}
-					return null;
-				};
-				const btn = find( sel.getBlocks() );
 				w.wp.data
-					.dispatch( 'core/block-editor' )
-					.updateBlockAttributes( btn.clientId, {
-						backgroundSlug: bgSlug,
-					} );
-				return sel.getBlock( btn.clientId ).attributes.backgroundSlug;
-			}, slug );
-			expect( applied ).toBe( slug );
+					.dispatch( 'core/interface' )
+					.enableComplementaryArea( 'core', 'edit-post/block' );
+				w.wp.data
+					.dispatch( 'core/interface' )
+					.enableComplementaryArea(
+						'core/edit-post',
+						'edit-post/block'
+					);
+			} );
 
-			// .first(): the badge text matches both the Notice and a nested
-			// wrapper element (strict-mode ambiguity, not duplication).
+			// Constraint 1: palette swatches are offered…
+			const swatches = page.locator(
+				'.components-circular-option-picker__option'
+			);
+			await expect( swatches.first() ).toBeVisible();
+
+			// …and no unconstrained color input exists anywhere in the panel.
 			await expect(
-				page.getByText( /Contrast [\d.]+:1 — AA ✓/ ).first()
-			).toBeVisible();
+				page.locator( 'input[type="text"][aria-label*="Hex" i]' )
+			).toHaveCount( 0 );
+
+			// Constraint 2: every theme palette slug produces an AA-passing
+			// derived pairing (the badge renders only when the engine passes).
+			const slugs: string[] = await page.evaluate( () => {
+				const w = window as any;
+				const settings = w.wp.data
+					.select( 'core/block-editor' )
+					.getSettings();
+				const palette =
+					settings.colors ??
+					settings.__experimentalFeatures?.color?.palette?.theme ??
+					[];
+				return palette
+					.map( ( c: { slug?: string } ) => c.slug )
+					.filter( Boolean );
+			} );
+			expect( slugs.length ).toBeGreaterThan( 0 );
+
+			for ( const slug of slugs ) {
+				const applied = await page.evaluate( ( bgSlug ) => {
+					const w = window as any;
+					const sel = w.wp.data.select( 'core/block-editor' );
+					const find = ( bs: any[] ): any => {
+						for ( const b of bs ) {
+							if ( b.name === 'accessible-blocks/button' ) {
+								return b;
+							}
+							const f = find( b.innerBlocks );
+							if ( f ) {
+								return f;
+							}
+						}
+						return null;
+					};
+					const btn = find( sel.getBlocks() );
+					w.wp.data
+						.dispatch( 'core/block-editor' )
+						.updateBlockAttributes( btn.clientId, {
+							backgroundSlug: bgSlug,
+						} );
+					return sel.getBlock( btn.clientId ).attributes
+						.backgroundSlug;
+				}, slug );
+				expect( applied ).toBe( slug );
+
+				// .first(): the badge text matches both the Notice and a nested
+				// wrapper element (strict-mode ambiguity, not duplication).
+				await expect(
+					page.getByText( /Contrast [\d.]+:1 — AA ✓/ ).first()
+				).toBeVisible();
+			}
 		}
-	} );
+	);
 } );
