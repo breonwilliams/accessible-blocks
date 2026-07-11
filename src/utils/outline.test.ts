@@ -33,9 +33,9 @@ function block(
 }
 
 const section = ( ...children: BlockNode[] ) =>
-	block( 'accessible-blocks/section', {}, children );
+	block( 'guardrail-blocks/section', {}, children );
 const heading = ( content = 'Heading' ) =>
-	block( 'accessible-blocks/heading', { content } );
+	block( 'guardrail-blocks/heading', { content } );
 const coreHeading = ( level: number, content = 'Core' ) =>
 	block( 'core/heading', { level, content } );
 const group = ( ...children: BlockNode[] ) =>
@@ -140,13 +140,13 @@ describe( 'collectOutline', () => {
 		const tree = [
 			section(
 				heading( 'Features' ),
-				block( 'accessible-blocks/card-grid', {}, [
-					block( 'accessible-blocks/card', {}, [
+				block( 'guardrail-blocks/card-grid', {}, [
+					block( 'guardrail-blocks/card', {}, [
 						heading( 'Card title' ),
 					] ),
 				] ),
-				block( 'accessible-blocks/accordion', {}, [
-					block( 'accessible-blocks/accordion-item', {
+				block( 'guardrail-blocks/accordion', {}, [
+					block( 'guardrail-blocks/accordion-item', {
 						title: 'Question?',
 					} ),
 				] )
@@ -163,7 +163,7 @@ describe( 'collectOutline', () => {
 	it( 'strips markup from heading text and skips non-heading blocks', () => {
 		const tree = [
 			section(
-				block( 'accessible-blocks/heading', {
+				block( 'guardrail-blocks/heading', {
 					content: 'Hello <em>world</em>',
 				} ),
 				paragraph()

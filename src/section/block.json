@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "accessible-blocks/section",
+	"name": "guardrail-blocks/section",
 	"version": "0.1.0",
 	"title": "Accessible Section",
 	"category": "design",
 	"icon": "layout",
 	"description": "A content section that manages heading structure for you: any Accessible Heading inside renders at the correct level based on how sections are nested — reordering can never break your document outline.",
 	"keywords": [ "section", "container", "group", "accessible", "outline" ],
-	"textdomain": "accessible-blocks",
+	"textdomain": "guardrail-blocks",
 	"attributes": {
 		"headingLevel": {
 			"type": "number",
@@ -16,9 +16,9 @@
 		}
 	},
 	"providesContext": {
-		"accessible-blocks/headingLevel": "headingLevel"
+		"guardrail-blocks/headingLevel": "headingLevel"
 	},
-	"usesContext": [ "accessible-blocks/headingLevel" ],
+	"usesContext": [ "guardrail-blocks/headingLevel" ],
 	"supports": {
 		"html": false,
 		"anchor": true,

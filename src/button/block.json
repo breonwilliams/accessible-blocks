@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "accessible-blocks/button",
+	"name": "guardrail-blocks/button",
 	"version": "0.1.0",
 	"title": "Accessible Button",
 	"category": "design",
 	"icon": "button",
 	"description": "A call-to-action button whose colors are always WCAG-safe: pick a background from your theme palette and the most readable text color is chosen for you — re-checked on every page view.",
 	"keywords": [ "button", "cta", "link", "accessible", "contrast" ],
-	"textdomain": "accessible-blocks",
+	"textdomain": "guardrail-blocks",
 	"attributes": {
 		"text": {
 			"type": "string",

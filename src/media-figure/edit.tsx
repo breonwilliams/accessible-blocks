@@ -65,12 +65,12 @@ export default function Edit( {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Accessibility', 'accessible-blocks' ) }>
+				<PanelBody title={ __( 'Accessibility', 'guardrail-blocks' ) }>
 					<TextareaControl
-						label={ __( 'Alternative text', 'accessible-blocks' ) }
+						label={ __( 'Alternative text', 'guardrail-blocks' ) }
 						help={ __(
 							'Describe the image for people who can’t see it. Falls back to the media library’s alt text.',
-							'accessible-blocks'
+							'guardrail-blocks'
 						) }
 						value={ alt }
 						onChange={ ( value ) =>
@@ -82,7 +82,7 @@ export default function Edit( {
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
 								'This image has no alt text anywhere — add it above or in the Media Library. Screen-reader users currently get nothing.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							) }
 						</Notice>
 					) }
@@ -90,20 +90,20 @@ export default function Edit( {
 						<Notice status="info" isDismissible={ false }>
 							{ __(
 								'Using the Media Library’s alt text.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							) }
 						</Notice>
 					) }
 				</PanelBody>
-				<PanelBody title={ __( 'Performance', 'accessible-blocks' ) }>
+				<PanelBody title={ __( 'Performance', 'guardrail-blocks' ) }>
 					<ToggleControl
 						label={ __(
 							'Hero image (above the fold)',
-							'accessible-blocks'
+							'guardrail-blocks'
 						) }
 						help={ __(
 							'Loads eagerly with high priority for better LCP. Leave off for images further down the page (they lazy-load).',
-							'accessible-blocks'
+							'guardrail-blocks'
 						) }
 						checked={ isHero }
 						onChange={ ( value ) =>
@@ -126,7 +126,7 @@ export default function Edit( {
 							}
 							placeholder={ __(
 								'Add a caption… (optional)',
-								'accessible-blocks'
+								'guardrail-blocks'
 							) }
 							allowedFormats={ [ 'core/italic', 'core/link' ] }
 						/>
@@ -135,7 +135,7 @@ export default function Edit( {
 							variant="secondary"
 							onClick={ () => setAttributes( { mediaId: 0 } ) }
 						>
-							{ __( 'Replace image', 'accessible-blocks' ) }
+							{ __( 'Replace image', 'guardrail-blocks' ) }
 						</Button>
 					</>
 				) : (
@@ -149,10 +149,10 @@ export default function Edit( {
 							} )
 						}
 						labels={ {
-							title: __( 'Media Figure', 'accessible-blocks' ),
+							title: __( 'Media Figure', 'guardrail-blocks' ),
 							instructions: __(
 								'Pick an image. Responsive markup, dimensions, and loading strategy are handled for you.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							),
 						} }
 					/>

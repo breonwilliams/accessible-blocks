@@ -1,4 +1,4 @@
-=== Accessible Blocks ===
+=== Guardrail Blocks ===
 Contributors: breonwilliams
 Tags: accessibility, blocks, wcag, contrast, headings
 Requires at least: 6.9
@@ -14,7 +14,7 @@ Blocks where accessibility is enforced by design: WCAG-safe color contrast and a
 
 Most accessibility failures on WordPress sites are authoring failures: a brand color that doesn't meet WCAG contrast, a heading hierarchy scrambled by reordering, an accordion built from divs with no keyboard support. They look fine in the editor and fail the audit later.
 
-Accessible Blocks takes a different approach: instead of *offering* accessible options, its blocks make the failure impossible to author — and re-verify everything on every page view.
+Guardrail Blocks takes a different approach: instead of *offering* accessible options, its blocks make the failure impossible to author — and re-verify everything on every page view.
 
 = The guarantees =
 
@@ -32,6 +32,10 @@ Accessible Section, Accessible Heading, Accessible Button, Card + Card Grid, Acc
 * The **Outline Checker** panel (in the page sidebar) watches the whole document — including core Heading blocks — and flags skipped levels and extra H1s with one-click block selection.
 * Everything inherits your theme's colors, spacing, and typography via `theme.json`. Nothing fights your design.
 * The plugin makes **zero external requests** and collects no data.
+
+= Source code & development =
+
+The compiled block scripts in `build/` are generated with @wordpress/scripts (webpack). The complete, human-readable source code — TypeScript/SCSS sources, build tooling, and the full test suite — is developed publicly at [github.com/breonwilliams/guardrail-blocks](https://github.com/breonwilliams/guardrail-blocks). To rebuild from source: `npm install && npm run build`.
 
 == Frequently Asked Questions ==
 

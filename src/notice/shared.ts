@@ -26,13 +26,13 @@ export const NOTICE_ROLES: Record< NoticeType, string > = {
 export function noticeLabel( type: NoticeType ): string {
 	switch ( type ) {
 		case 'success':
-			return __( 'Success', 'accessible-blocks' );
+			return __( 'Success', 'guardrail-blocks' );
 		case 'warning':
-			return __( 'Warning', 'accessible-blocks' );
+			return __( 'Warning', 'guardrail-blocks' );
 		case 'error':
-			return __( 'Error', 'accessible-blocks' );
+			return __( 'Error', 'guardrail-blocks' );
 		default:
-			return __( 'Note', 'accessible-blocks' );
+			return __( 'Note', 'guardrail-blocks' );
 	}
 }
 

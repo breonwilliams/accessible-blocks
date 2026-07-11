@@ -22,8 +22,8 @@ type AccordionEditProps = BlockEditProps< AccordionAttributes > & {
 };
 
 const TEMPLATE: Array< [ string, Record< string, unknown >? ] > = [
-	[ 'accessible-blocks/accordion-item' ],
-	[ 'accessible-blocks/accordion-item' ],
+	[ 'guardrail-blocks/accordion-item' ],
+	[ 'guardrail-blocks/accordion-item' ],
 ];
 
 export default function Edit( {
@@ -44,7 +44,7 @@ export default function Edit( {
 
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		allowedBlocks: [ 'accessible-blocks/accordion-item' ],
+		allowedBlocks: [ 'guardrail-blocks/accordion-item' ],
 		template: TEMPLATE,
 	} );
 

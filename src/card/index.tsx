@@ -27,7 +27,7 @@ type CardEditProps = BlockEditProps< CardAttributes > & {
 };
 
 const TEMPLATE: Array< [ string, Record< string, unknown >? ] > = [
-	[ 'accessible-blocks/heading' ],
+	[ 'guardrail-blocks/heading' ],
 	[ 'core/paragraph' ],
 ];
 

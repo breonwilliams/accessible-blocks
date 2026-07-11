@@ -40,13 +40,13 @@ export default function Edit( {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Accessibility', 'accessible-blocks' ) }>
+				<PanelBody title={ __( 'Accessibility', 'guardrail-blocks' ) }>
 					<WPNotice status="success" isDismissible={ false }>
 						{ sprintf(
 							/* translators: 1: notice type, 2: ARIA role. */
 							__(
 								'This %1$s notice renders with role="%2$s" and a visible text label, so its meaning never relies on color alone. Change the type via the block toolbar variations.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							),
 							type,
 							NOTICE_ROLES[ type ]

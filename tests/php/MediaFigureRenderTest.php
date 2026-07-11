@@ -2,7 +2,7 @@
 /**
  * Render tests for the Media Figure dynamic block (Guarantee C).
  *
- * @package AccessibleBlocks\Tests
+ * @package GuardrailBlocks\Tests
  */
 
 declare( strict_types=1 );
@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 final class MediaFigureRenderTest extends TestCase {
 
-	private const TEMPLATE = ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/src/media-figure/render.php';
+	private const TEMPLATE = GUARDRAIL_BLOCKS_PLUGIN_ROOT . '/src/media-figure/render.php';
 
 	/**
 	 * @param array $attributes Attributes.

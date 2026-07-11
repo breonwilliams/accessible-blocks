@@ -1,6 +1,6 @@
-# Accessible Blocks — Project Foundation
+# Guardrail Blocks — Project Foundation
 
-> **Working name:** "Accessible Blocks" · **Working slug/text-domain:** `accessible-blocks` · **Block namespace:** `accessible-blocks/*`
+> **Working name:** "Guardrail Blocks" · **Working slug/text-domain:** `guardrail-blocks` · **Block namespace:** `guardrail-blocks/*`
 > **Status:** Foundation / pre-scaffold. No code written yet — this document is the brief.
 > **Author of foundation:** Prepared with Breon Williams (founder, Promptless WP) for a portfolio-grade, WordPress.org-approvable Gutenberg block plugin.
 > **Last updated:** 2026-07-08
@@ -17,7 +17,7 @@ This is a **handoff brief**. A fresh Claude Cowork (or Claude Code) session shou
 4. Treat the two **accessibility guarantees** (§4) as the product's reason to exist — every block must honor them.
 
 Local dev site: **"gutenburg"** (Local by Flywheel). This plugin lives at
-`wp-content/plugins/accessible-blocks/`. The site name is just the local environment; it is **not** the plugin name and "Gutenberg" must **not** appear in the plugin name or slug (WordPress.org trademark rule — see §11).
+`wp-content/plugins/guardrail-blocks/`. The site name is just the local environment; it is **not** the plugin name and "Gutenberg" must **not** appear in the plugin name or slug (WordPress.org trademark rule — see §11).
 
 ---
 
@@ -40,7 +40,7 @@ This plugin ports two Promptless behaviors to the **native block editor**:
 - **Smart contrast enforcement** — color pairings are validated/corrected to WCAG at author time and at render time.
 - **Unbreakable semantic heading order** — heading levels are *derived from document position*, not hand-picked, so reordering never breaks the outline.
 
-> **Architectural note (important):** Unlike Promptless — which uses a custom content schema and its own React editing app — this project is **native-first**: registered Gutenberg blocks, the core Patterns API, `theme.json`, block context, and dynamic (server-rendered) blocks. That contrast is intentional and is itself a strong interview talking point ("Promptless is a custom deployment layer; Accessible Blocks is native block engineering; I can speak to the tradeoffs of both").
+> **Architectural note (important):** Unlike Promptless — which uses a custom content schema and its own React editing app — this project is **native-first**: registered Gutenberg blocks, the core Patterns API, `theme.json`, block context, and dynamic (server-rendered) blocks. That contrast is intentional and is itself a strong interview talking point ("Promptless is a custom deployment layer; Guardrail Blocks is native block engineering; I can speak to the tradeoffs of both").
 
 ## 3. Who it's for
 
@@ -61,7 +61,7 @@ Everything else is a normal block; these two systems are the differentiator and 
 ### Guarantee B — Unbreakable semantic heading hierarchy
 - A **Section** container block (`InnerBlocks`) provides a heading-level value via the **Block Context API** (`providesContext`). A top-level Section provides level `2`; a nested Section consumes its parent's level and provides `parent + 1` (capped at 6).
 - An **Accessible Heading** block **consumes** that context (`usesContext`) and **derives** its level from position in the tree. The author writes the text; the plugin owns the level.
-- The block is **dynamic (server-rendered)**: `render_callback` reads `$block->context['accessible-blocks/headingLevel']` and emits the correct `<h2>`…`<h6>`. Reordering/re-nesting recomputes the context → the outline auto-corrects and can never skip a level.
+- The block is **dynamic (server-rendered)**: `render_callback` reads `$block->context['guardrail-blocks/headingLevel']` and emits the correct `<h2>`…`<h6>`. Reordering/re-nesting recomputes the context → the outline auto-corrects and can never skip a level.
 - **Outline Checker (safety net):** a document panel that walks the full block tree via `@wordpress/data` (`select('core/block-editor').getBlocks()`), including core Heading blocks, and warns on skipped levels or multiple `<h1>`s. This protects content authored with core blocks too.
 
 ### Supporting semantic/keyboard guarantees (apply per relevant block)
@@ -147,8 +147,8 @@ A **focused, accessibility-first library that coexists with core blocks**, not a
 - **Dynamic blocks:** `render.php` per dynamic block; read `$block->context` for heading level; escape all output (`esc_html`, `wp_kses_post` where markup is allowed).
 - **Editor integrations:** the Outline Checker registered via `registerPlugin` + `PluginDocumentSettingPanel`, reading `core/block-editor` store.
 - **Interactivity:** prefer the **Interactivity API** (`@wordpress/interactivity`) for accordion/tabs view logic (modern, SSR-friendly) — or a small vanilla `viewScript` if simpler for v1. Decide in Phase 3.
-- **i18n:** text domain `accessible-blocks`; all strings translatable.
-- **PHP:** 8.0+ target, namespaced, prefixed (`AccessibleBlocks\`), no global leakage.
+- **i18n:** text domain `guardrail-blocks`; all strings translatable.
+- **PHP:** 8.0+ target, namespaced, prefixed (`GuardrailBlocks\`), no global leakage.
 
 ## 9. The "no QA cleanup" enforcement layers
 
@@ -188,8 +188,8 @@ Only then move on. This catches issues per-iteration instead of in a big cleanup
 ## 11. WordPress.org compliance checklist
 Breon has shipped two approved .org plugins (Promptless Forms, Image To Design Tokens), so the pipeline is known. For this plugin specifically:
 - [ ] GPLv2-or-later; all bundled code GPL-compatible.
-- [ ] Name/slug **must not** contain "WordPress" or "Gutenberg" (trademark). "Accessible Blocks" is fine pending slug availability check.
-- [ ] Unique prefix everywhere (`accessible-blocks` / `AccessibleBlocks\` / `accessible_blocks_`).
+- [ ] Name/slug **must not** contain "WordPress" or "Gutenberg" (trademark). "Guardrail Blocks" is fine pending slug availability check.
+- [ ] Unique prefix everywhere (`guardrail-blocks` / `GuardrailBlocks\` / `guardrail_blocks_`).
 - [ ] Sanitize inputs, escape all output, verify nonces/capabilities on any server actions.
 - [ ] i18n with the correct text domain; no hardcoded user-facing strings.
 - [ ] **No external HTTP calls** without explicit consent (there are none by design).
@@ -201,7 +201,7 @@ Breon has shipped two approved .org plugins (Promptless Forms, Image To Design T
 ## 12. Scalability plan
 - Block registry pattern so new blocks are added by dropping a folder + registering — no core rewrites.
 - Shared `contrast`/`outline` utils are the reusable engine; new blocks consume them.
-- Extensibility: expose filters (e.g., `accessible_blocks_min_contrast`, `accessible_blocks_heading_base_level`) so other developers/themes can tune behavior — good open-source citizenship and a senior signal.
+- Extensibility: expose filters (e.g., `guardrail_blocks_min_contrast`, `guardrail_blocks_heading_base_level`) so other developers/themes can tune behavior — good open-source citizenship and a senior signal.
 - Block-theme/FSE compatible from day one (reads `theme.json`); a matching starter block theme is a clean v1.x add.
 
 ## 13. v2+ optionality (do NOT build in v1, but architect so it's possible)
@@ -225,12 +225,12 @@ Breon has shipped two approved .org plugins (Promptless Forms, Image To Design T
 
 ## 15. Portfolio & positioning (why we're building it this way)
 - **Ship it public:** GitHub repo with readable, incremental commits and visible tests; a live demo page; a case-study README (problem → architecture → the two guarantees → results). Market data says hiring engineers value live links + GitHub with tests over PDFs.
-- **Resume line (add once shipped):** *"Accessible Blocks — a native Gutenberg block library (block.json, TypeScript React edit/save, dynamic/server-rendered blocks, Block Context API, patterns, theme.json) that enforces WCAG contrast and unbreakable heading hierarchy by design; Jest/Playwright/PHPUnit + GitHub Actions CI; published on WordPress.org."*
+- **Resume line (add once shipped):** *"Guardrail Blocks — a native Gutenberg block library (block.json, TypeScript React edit/save, dynamic/server-rendered blocks, Block Context API, patterns, theme.json) that enforces WCAG contrast and unbreakable heading hierarchy by design; Jest/Playwright/PHPUnit + GitHub Actions CI; published on WordPress.org."*
 - **Interview talking points:** Block Context API for derived heading levels; dynamic blocks + `render_callback`; the three-layer enforcement architecture; the deliberate native-vs-Promptless architectural contrast; WCAG/ARIA specifics.
 - **Brand tie-in:** the build is also social content (the same "no QA cleanup / accessibility by design" narrative as Promptless), so it feeds Breon's X/LinkedIn plan.
 
 ## 16. Open decisions — **LOCKED with Breon, 2026-07-08**
-1. **Final name + slug** — **"Accessible Blocks" / `accessible-blocks`.** Directory search on 2026-07-08 found no existing plugin at that slug (nearest: "Block Accessibility Checks," "WP Accessibility"). Caveat: pending submissions can reserve slugs invisibly — final confirmation happens at Phase 7 submission; have a fallback name ready ("A11y Guard Blocks" or "Guardrail Blocks").
+1. **Final name + slug** — **"Guardrail Blocks" / `guardrail-blocks`.** Directory search on 2026-07-08 found no existing plugin at that slug (nearest: "Block Accessibility Checks," "WP Accessibility"). Caveat: pending submissions can reserve slugs invisibly — final confirmation happens at Phase 7 submission; have a fallback name ready ("A11y Guard Blocks" or "Guardrail Blocks").
 2. **Minimum WP version** — **WP 6.9** (current 7.0 − 1). **PHP 8.0+** floor confirmed. Note: 6.9 floor means `wp_register_block_metadata_collection()` (6.7+) and the Interactivity API are always available.
 3. **v1 block cut** — **defer Tabs to v1.1.** Ship 8 blocks: Section, Accessible Heading, Button/CTA, Card + Card Grid, Accordion, Notice/Callout, Media/Figure, Table of Contents. Tabs is the heaviest ARIA/keyboard pattern and Accordion proves the same interactive-a11y story.
 4. **Interactivity approach** — **Interactivity API** (`@wordpress/interactivity`) for Accordion (and Tabs when it lands in v1.1).

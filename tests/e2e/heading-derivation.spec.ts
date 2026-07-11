@@ -14,12 +14,12 @@ test.describe( 'Accessible Heading level derivation', () => {
 		editor,
 		page,
 	} ) => {
-		await editor.insertBlock( { name: 'accessible-blocks/section' } );
+		await editor.insertBlock( { name: 'guardrail-blocks/section' } );
 
 		// The section template creates an Accessible Heading; it must be
 		// a real <h2> in the editor canvas.
 		const heading = editor.canvas.locator(
-			'[data-type="accessible-blocks/heading"]'
+			'[data-type="guardrail-blocks/heading"]'
 		);
 		await expect( heading ).toHaveJSProperty( 'tagName', 'H2' );
 
@@ -30,9 +30,9 @@ test.describe( 'Accessible Heading level derivation', () => {
 			const outer = w.wp.data
 				.select( 'core/block-editor' )
 				.getBlocks()
-				.find( ( b: any ) => b.name === 'accessible-blocks/section' );
+				.find( ( b: any ) => b.name === 'guardrail-blocks/section' );
 			const nested = w.wp.blocks.createBlock(
-				'accessible-blocks/section'
+				'guardrail-blocks/section'
 			);
 			w.wp.data
 				.dispatch( 'core/block-editor' )
@@ -44,7 +44,7 @@ test.describe( 'Accessible Heading level derivation', () => {
 		} );
 
 		const nestedHeading = editor.canvas.locator(
-			'[data-type="accessible-blocks/section"] [data-type="accessible-blocks/section"] [data-type="accessible-blocks/heading"]'
+			'[data-type="guardrail-blocks/section"] [data-type="guardrail-blocks/section"] [data-type="guardrail-blocks/heading"]'
 		);
 		await expect( nestedHeading ).toHaveJSProperty( 'tagName', 'H3' );
 	} );
@@ -53,7 +53,7 @@ test.describe( 'Accessible Heading level derivation', () => {
 		editor,
 		page,
 	} ) => {
-		await editor.insertBlock( { name: 'accessible-blocks/section' } );
+		await editor.insertBlock( { name: 'guardrail-blocks/section' } );
 
 		await page.evaluate( () => {
 			const w = window as any;
@@ -61,9 +61,9 @@ test.describe( 'Accessible Heading level derivation', () => {
 			const d = w.wp.data.dispatch( 'core/block-editor' );
 			const outer = sel
 				.getBlocks()
-				.find( ( b: any ) => b.name === 'accessible-blocks/section' );
+				.find( ( b: any ) => b.name === 'guardrail-blocks/section' );
 			const nested = w.wp.blocks.createBlock(
-				'accessible-blocks/section'
+				'guardrail-blocks/section'
 			);
 			d.insertBlocks( nested, outer.innerBlocks.length, outer.clientId );
 		} );
@@ -75,9 +75,9 @@ test.describe( 'Accessible Heading level derivation', () => {
 			const d = w.wp.data.dispatch( 'core/block-editor' );
 			const outer = sel
 				.getBlocks()
-				.find( ( b: any ) => b.name === 'accessible-blocks/section' );
+				.find( ( b: any ) => b.name === 'guardrail-blocks/section' );
 			const nested = outer.innerBlocks.find(
-				( b: any ) => b.name === 'accessible-blocks/section'
+				( b: any ) => b.name === 'guardrail-blocks/section'
 			);
 			d.moveBlocksToPosition(
 				[ nested.clientId ],
@@ -89,7 +89,7 @@ test.describe( 'Accessible Heading level derivation', () => {
 
 		// Both sections are now top-level → both headings are H2.
 		const headings = editor.canvas.locator(
-			'[data-type="accessible-blocks/heading"]'
+			'[data-type="guardrail-blocks/heading"]'
 		);
 		await expect( headings ).toHaveCount( 2 );
 		await expect( headings.nth( 0 ) ).toHaveJSProperty( 'tagName', 'H2' );

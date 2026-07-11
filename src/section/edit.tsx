@@ -28,7 +28,7 @@ type SectionEditProps = BlockEditProps< SectionAttributes > & {
 };
 
 const TEMPLATE: Array< [ string, Record< string, unknown >? ] > = [
-	[ 'accessible-blocks/heading' ],
+	[ 'guardrail-blocks/heading' ],
 	[ 'core/paragraph' ],
 ];
 
@@ -60,14 +60,14 @@ export default function Edit( {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Heading structure', 'accessible-blocks' ) }
+					title={ __( 'Heading structure', 'guardrail-blocks' ) }
 				>
 					<Notice status="info" isDismissible={ false }>
 						{ sprintf(
 							/* translators: %d: heading level number (2-6). */
 							__(
 								'Headings inside this section render as H%d. The level comes from section nesting and always stays in order — no manual setting needed.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							),
 							derived
 						) }

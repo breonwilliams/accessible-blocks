@@ -1,5 +1,5 @@
 {
-	"name": "breonwilliams/accessible-blocks",
+	"name": "breonwilliams/guardrail-blocks",
 	"description": "Accessibility-first blocks with WCAG-safe color contrast and unbreakable heading hierarchy — enforced by design.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",

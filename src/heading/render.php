@@ -11,34 +11,34 @@
  * @var string   $content    Inner content (unused; dynamic).
  * @var WP_Block $block      Block instance (context source).
  *
- * @package AccessibleBlocks
+ * @package GuardrailBlocks
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$accessible_blocks_content = isset( $attributes['content'] ) ? trim( (string) $attributes['content'] ) : '';
+$guardrail_blocks_content = isset( $attributes['content'] ) ? trim( (string) $attributes['content'] ) : '';
 
-if ( '' === $accessible_blocks_content ) {
+if ( '' === $guardrail_blocks_content ) {
 	return;
 }
 
-$accessible_blocks_level = isset( $block->context['accessible-blocks/headingLevel'] )
-	? (int) $block->context['accessible-blocks/headingLevel']
+$guardrail_blocks_level = isset( $block->context['guardrail-blocks/headingLevel'] )
+	? (int) $block->context['guardrail-blocks/headingLevel']
 	: 2;
 
 // Clamp to the derived-heading range: the page title owns H1, and HTML
 // stops at H6. Mirrors clampHeadingLevel() in src/utils/outline.ts.
-$accessible_blocks_level = min( max( $accessible_blocks_level, 2 ), 6 );
+$guardrail_blocks_level = min( max( $guardrail_blocks_level, 2 ), 6 );
 
 // Anchor id so the Table of Contents can link here (same algorithm and
 // document order as the ToC walker → identical ids).
-$accessible_blocks_anchor = \AccessibleBlocks\Outline::unique_anchor( $accessible_blocks_content );
+$guardrail_blocks_anchor = \GuardrailBlocks\Outline::unique_anchor( $guardrail_blocks_content );
 
 printf(
 	'<h%1$d %2$s>%3$s</h%1$d>',
-	(int) $accessible_blocks_level,
-	get_block_wrapper_attributes( array( 'id' => $accessible_blocks_anchor ) ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Pre-escaped by core.
-	wp_kses_post( $accessible_blocks_content )
+	(int) $guardrail_blocks_level,
+	get_block_wrapper_attributes( array( 'id' => $guardrail_blocks_anchor ) ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Pre-escaped by core.
+	wp_kses_post( $guardrail_blocks_content )
 );

@@ -126,7 +126,7 @@ export default function Edit( {
 				/* translators: 1: contrast ratio, 2: color name or slug. */
 				__(
 					'Contrast %1$s:1 — AA ✓. Text color: %2$s (auto-selected).',
-					'accessible-blocks'
+					'guardrail-blocks'
 				),
 				pairing.ratio.toFixed( 2 ),
 				pairing.foreground.name ?? pairing.foreground.slug
@@ -137,7 +137,7 @@ export default function Edit( {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Background color', 'accessible-blocks' ) }
+					title={ __( 'Background color', 'guardrail-blocks' ) }
 				>
 					<ColorPalette
 						colors={ verifiablePalette }
@@ -163,7 +163,7 @@ export default function Edit( {
 						<Notice status="info" isDismissible={ false }>
 							{ __(
 								'No theme palette color passes WCAG AA on this background, so black/white was used instead.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							) }
 						</Notice>
 					) }
@@ -171,7 +171,7 @@ export default function Edit( {
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
 								'The saved color can’t be contrast-checked with this theme, so it isn’t applied — the button uses the theme’s default button styling. Pick a color above to re-enable enforcement.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							) }
 						</Notice>
 					) }
@@ -181,25 +181,25 @@ export default function Edit( {
 								/* translators: %d: number of hidden colors. */
 								__(
 									'%d theme color(s) aren’t offered because their values can’t be contrast-checked.',
-									'accessible-blocks'
+									'guardrail-blocks'
 								),
 								hiddenCount
 							) }
 						</Notice>
 					) }
 				</PanelBody>
-				<PanelBody title={ __( 'Link', 'accessible-blocks' ) }>
+				<PanelBody title={ __( 'Link', 'guardrail-blocks' ) }>
 					<URLInput
-						label={ __( 'Link URL', 'accessible-blocks' ) }
+						label={ __( 'Link URL', 'guardrail-blocks' ) }
 						value={ url }
 						onChange={ ( newUrl ) =>
 							setAttributes( { url: newUrl } )
 						}
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Layout', 'accessible-blocks' ) }>
+				<PanelBody title={ __( 'Layout', 'guardrail-blocks' ) }>
 					<ToggleControl
-						label={ __( 'Full width', 'accessible-blocks' ) }
+						label={ __( 'Full width', 'guardrail-blocks' ) }
 						checked={ width === 'full' }
 						onChange={ ( isFull ) =>
 							setAttributes( {
@@ -219,7 +219,7 @@ export default function Edit( {
 					onChange={ ( newText ) =>
 						setAttributes( { text: newText } )
 					}
-					placeholder={ __( 'Add text…', 'accessible-blocks' ) }
+					placeholder={ __( 'Add text…', 'guardrail-blocks' ) }
 					// Inline color/formatting could break the contrast
 					// guarantee, so no formats are allowed (constrain,
 					// don't configure).

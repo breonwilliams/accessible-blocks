@@ -1,4 +1,4 @@
-# Accessible Blocks — AI Build Guardrails
+# Guardrail Blocks — AI Build Guardrails
 
 **Read `docs/PROJECT_FOUNDATION.md` first.** That is the full brief. This file is the short list of standing rules for any session building this plugin.
 
@@ -10,7 +10,7 @@ A native WordPress Gutenberg block library whose reason to exist is **accessibil
 2. **The two guarantees are sacred** (Foundation §4). Every block honors them. Heading level is *derived from block context*, never hand-picked. Colors are validated/corrected against `theme.json`, never hardcoded.
 3. **Enforce, don't just offer.** Prefer constraints that make the failure impossible; use author-time warnings only as a safety net.
 4. **Zero external HTTP calls** at runtime. No phone-home, no runtime CDN deps.
-5. **WordPress.org-clean at every step** (Foundation §11): GPLv2+, unique prefix (`accessible-blocks` / `AccessibleBlocks\` / `accessible_blocks_`), sanitize/escape/nonce, i18n, no "WordPress"/"Gutenberg" in the name or slug, **Plugin Check must pass**.
+5. **WordPress.org-clean at every step** (Foundation §11): GPLv2+, unique prefix (`guardrail-blocks` / `GuardrailBlocks\` / `guardrail_blocks_`), sanitize/escape/nonce, i18n, no "WordPress"/"Gutenberg" in the name or slug, **Plugin Check must pass**.
 6. **Model what you preach** — the plugin's own admin/editor UI and output must meet WCAG and the WordPress accessibility coding standards.
 7. **Ship with tests + CI.** Jest (utils), Playwright (editor E2E), PHPUnit (dynamic render), GitHub Actions. Coverage is part of the deliverable, not optional — it's core to the "real engineer" positioning.
 
@@ -28,7 +28,7 @@ Focused accessibility-first library that **coexists with core blocks** — not a
 Follow the roadmap in Foundation §14 (Phase 0 → 7). Do not skip ahead of the two guarantee systems (Phases 1–2); everything else depends on them.
 
 ## Before you start coding
-~~Confirm the open decisions in Foundation §16 with Breon.~~ **Done (2026-07-08), locked in §16:** name/slug "Accessible Blocks" / `accessible-blocks` (final availability check at submission); min **WP 6.9** / **PHP 8.0+**; **Tabs deferred to v1.1** (v1 ships the other 8 blocks); **Interactivity API** for Accordion.
+~~Confirm the open decisions in Foundation §16 with Breon.~~ **Done (2026-07-08), locked in §16:** name/slug "Guardrail Blocks" / `guardrail-blocks` (final availability check at submission); min **WP 6.9** / **PHP 8.0+**; **Tabs deferred to v1.1** (v1 ships the other 8 blocks); **Interactivity API** for Accordion.
 
 ## Out of scope for v1 (do not build yet)
 FSE full theme, a "pro" tier, and the **WordPress Abilities API / MCP Adapter** registration. The MCP angle is a deliberate **v2** add (Foundation §13) — architect so it's possible, but building it now would dilute the native-block story that this project exists to prove.

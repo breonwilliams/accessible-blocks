@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="AccessibleBlocks">
-	<description>Coding standards for the Accessible Blocks plugin.</description>
+<ruleset name="GuardrailBlocks">
+	<description>Coding standards for the Guardrail Blocks plugin.</description>
 
 	<file>.</file>
 
@@ -28,9 +28,9 @@
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<property name="prefixes" type="array">
-				<element value="AccessibleBlocks"/>
-				<element value="accessible_blocks"/>
-				<element value="ACCESSIBLE_BLOCKS"/>
+				<element value="GuardrailBlocks"/>
+				<element value="guardrail_blocks"/>
+				<element value="GUARDRAIL_BLOCKS"/>
 			</property>
 		</properties>
 	</rule>
@@ -39,7 +39,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="accessible-blocks"/>
+				<element value="guardrail-blocks"/>
 			</property>
 		</properties>
 	</rule>

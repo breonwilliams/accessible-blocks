@@ -8,15 +8,15 @@ import metadata from './block.json';
 import './style.scss';
 
 const TEMPLATE: Array< [ string, Record< string, unknown >? ] > = [
-	[ 'accessible-blocks/card' ],
-	[ 'accessible-blocks/card' ],
-	[ 'accessible-blocks/card' ],
+	[ 'guardrail-blocks/card' ],
+	[ 'guardrail-blocks/card' ],
+	[ 'guardrail-blocks/card' ],
 ];
 
 function Edit() {
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		allowedBlocks: [ 'accessible-blocks/card' ],
+		allowedBlocks: [ 'guardrail-blocks/card' ],
 		template: TEMPLATE,
 		orientation: 'horizontal',
 	} );

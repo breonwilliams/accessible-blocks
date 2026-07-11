@@ -1,4 +1,4 @@
-# Accessible Blocks
+# Guardrail Blocks
 
 > Native WordPress blocks where accessibility is **enforced by design** — WCAG-safe color contrast and an unbreakable semantic heading hierarchy, guaranteed at author time *and* render time. No QA cleanup pass.
 

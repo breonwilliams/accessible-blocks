@@ -28,7 +28,7 @@ test.describe( 'Accessible Button contrast enforcement', () => {
 		'every palette background yields a passing AA ratio; no custom color input exists',
 		async ( { editor, page } ) => {
 			await editor.insertBlock( {
-				name: 'accessible-blocks/button',
+				name: 'guardrail-blocks/button',
 				attributes: { text: 'Get started' },
 			} );
 
@@ -81,7 +81,7 @@ test.describe( 'Accessible Button contrast enforcement', () => {
 					const sel = w.wp.data.select( 'core/block-editor' );
 					const find = ( bs: any[] ): any => {
 						for ( const b of bs ) {
-							if ( b.name === 'accessible-blocks/button' ) {
+							if ( b.name === 'guardrail-blocks/button' ) {
 								return b;
 							}
 							const f = find( b.innerBlocks );

@@ -39,13 +39,13 @@ export default function Edit( {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Heading level', 'accessible-blocks' ) }>
+				<PanelBody title={ __( 'Heading level', 'guardrail-blocks' ) }>
 					<Notice status="success" isDismissible={ false }>
 						{ sprintf(
 							/* translators: %d: heading level number (2-6). */
 							__(
 								'Renders as H%d — derived from section nesting, so the document outline always stays valid.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							),
 							level
 						) }
@@ -54,7 +54,7 @@ export default function Edit( {
 						<Notice status="info" isDismissible={ false }>
 							{ __(
 								'This heading is not inside an Accessible Section, so it uses H2. Place it in a section to participate in nesting.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							) }
 						</Notice>
 					) }
@@ -67,7 +67,7 @@ export default function Edit( {
 				onChange={ ( content ) => setAttributes( { content } ) }
 				placeholder={ sprintf(
 					/* translators: %d: heading level number (2-6). */
-					__( 'Heading (H%d)…', 'accessible-blocks' ),
+					__( 'Heading (H%d)…', 'guardrail-blocks' ),
 					level
 				) }
 				// Inline formats (bold/color/etc.) are disabled: a heading's

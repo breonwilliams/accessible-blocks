@@ -11,25 +11,25 @@
  * @var string   $content    Inner content (unused; dynamic).
  * @var WP_Block $block      Block instance (context source).
  *
- * @package AccessibleBlocks
+ * @package GuardrailBlocks
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$accessible_blocks_post_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
-$accessible_blocks_post    = $accessible_blocks_post_id ? get_post( $accessible_blocks_post_id ) : null;
+$guardrail_blocks_post_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
+$guardrail_blocks_post    = $guardrail_blocks_post_id ? get_post( $guardrail_blocks_post_id ) : null;
 
-if ( ! $accessible_blocks_post ) {
+if ( ! $guardrail_blocks_post ) {
 	return;
 }
 
-$accessible_blocks_entries = \AccessibleBlocks\Outline::collect(
-	parse_blocks( (string) $accessible_blocks_post->post_content )
+$guardrail_blocks_entries = \GuardrailBlocks\Outline::collect(
+	parse_blocks( (string) $guardrail_blocks_post->post_content )
 );
 
-if ( empty( $accessible_blocks_entries ) ) {
+if ( empty( $guardrail_blocks_entries ) ) {
 	return;
 }
 
@@ -38,7 +38,7 @@ if ( empty( $accessible_blocks_entries ) ) {
  *
  * @param array $entries Outline entries.
  */
-$accessible_blocks_build_list = static function ( array $entries ): string {
+$guardrail_blocks_build_list = static function ( array $entries ): string {
 	$html  = '';
 	$stack = array();
 	$prev  = null;
@@ -65,11 +65,11 @@ $accessible_blocks_build_list = static function ( array $entries ): string {
 			}
 		}
 
-		$accessible_blocks_text = esc_html( $entry['text'] );
+		$guardrail_blocks_text = esc_html( $entry['text'] );
 		$html                  .= '<li class="ab-toc__item">';
 		$html                  .= '' !== $entry['anchor']
-			? '<a href="#' . esc_attr( $entry['anchor'] ) . '">' . $accessible_blocks_text . '</a>'
-			: '<span>' . $accessible_blocks_text . '</span>';
+			? '<a href="#' . esc_attr( $entry['anchor'] ) . '">' . $guardrail_blocks_text . '</a>'
+			: '<span>' . $guardrail_blocks_text . '</span>';
 
 		$prev = $level;
 	}
@@ -89,6 +89,6 @@ $accessible_blocks_build_list = static function ( array $entries ): string {
 printf(
 	'<nav %1$s aria-label="%2$s">%3$s</nav>',
 	get_block_wrapper_attributes(), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Pre-escaped by core.
-	esc_attr__( 'Table of contents', 'accessible-blocks' ),
-	$accessible_blocks_build_list( $accessible_blocks_entries ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped during construction above.
+	esc_attr__( 'Table of contents', 'guardrail-blocks' ),
+	$guardrail_blocks_build_list( $guardrail_blocks_entries ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped during construction above.
 );

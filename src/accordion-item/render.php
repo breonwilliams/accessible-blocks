@@ -16,29 +16,29 @@
  * @var string   $content    Inner blocks (panel content).
  * @var WP_Block $block      Block instance (context source).
  *
- * @package AccessibleBlocks
+ * @package GuardrailBlocks
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$accessible_blocks_title = isset( $attributes['title'] ) ? trim( (string) $attributes['title'] ) : '';
+$guardrail_blocks_title = isset( $attributes['title'] ) ? trim( (string) $attributes['title'] ) : '';
 
-if ( '' === $accessible_blocks_title && '' === trim( (string) $content ) ) {
+if ( '' === $guardrail_blocks_title && '' === trim( (string) $content ) ) {
 	return;
 }
 
-$accessible_blocks_level = isset( $block->context['accessible-blocks/headingLevel'] )
-	? (int) $block->context['accessible-blocks/headingLevel']
+$guardrail_blocks_level = isset( $block->context['guardrail-blocks/headingLevel'] )
+	? (int) $block->context['guardrail-blocks/headingLevel']
 	: 2;
-$accessible_blocks_level = min( max( $accessible_blocks_level, 2 ), 6 );
+$guardrail_blocks_level = min( max( $guardrail_blocks_level, 2 ), 6 );
 
-$accessible_blocks_id = wp_unique_id( 'ab-accordion-item-' );
+$guardrail_blocks_id = wp_unique_id( 'ab-accordion-item-' );
 
-$accessible_blocks_wrapper = get_block_wrapper_attributes(
+$guardrail_blocks_wrapper = get_block_wrapper_attributes(
 	array(
-		'data-wp-interactive' => 'accessible-blocks/accordion',
+		'data-wp-interactive' => 'guardrail-blocks/accordion',
 		'data-wp-context'     => wp_json_encode( array( 'isOpen' => false ) ),
 	)
 );
@@ -61,9 +61,9 @@ printf(
 			'%5$s' .
 		'</div>' .
 	'</div>',
-	$accessible_blocks_wrapper, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Pre-escaped by get_block_wrapper_attributes().
-	(int) $accessible_blocks_level,
-	esc_attr( $accessible_blocks_id ),
-	esc_html( $accessible_blocks_title ),
+	$guardrail_blocks_wrapper, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Pre-escaped by get_block_wrapper_attributes().
+	(int) $guardrail_blocks_level,
+	esc_attr( $guardrail_blocks_id ),
+	esc_html( $guardrail_blocks_title ),
 	$content // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Inner blocks, escaped during their own render.
 );

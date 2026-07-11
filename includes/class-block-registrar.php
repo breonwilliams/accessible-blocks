@@ -2,12 +2,12 @@
 /**
  * Block registration from build metadata.
  *
- * @package AccessibleBlocks
+ * @package GuardrailBlocks
  */
 
 declare( strict_types=1 );
 
-namespace AccessibleBlocks;
+namespace GuardrailBlocks;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

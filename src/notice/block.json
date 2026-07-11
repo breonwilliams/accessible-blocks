@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "accessible-blocks/notice",
+	"name": "guardrail-blocks/notice",
 	"version": "0.1.0",
 	"title": "Notice",
 	"category": "text",
 	"icon": "info-outline",
 	"description": "A callout with the correct semantic role built in — info, success, warning, or error — announced properly by screen readers and never relying on color alone.",
 	"keywords": [ "notice", "callout", "alert", "warning", "info", "accessible" ],
-	"textdomain": "accessible-blocks",
+	"textdomain": "guardrail-blocks",
 	"attributes": {
 		"type": {
 			"type": "string",

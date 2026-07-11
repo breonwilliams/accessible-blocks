@@ -1,14 +1,14 @@
 <?php
 /**
- * Tests for AccessibleBlocks\Outline — must stay in lockstep with the Jest
+ * Tests for GuardrailBlocks\Outline — must stay in lockstep with the Jest
  * suite for src/utils/outline.ts.
  *
- * @package AccessibleBlocks\Tests
+ * @package GuardrailBlocks\Tests
  */
 
 declare( strict_types=1 );
 
-use AccessibleBlocks\Outline;
+use GuardrailBlocks\Outline;
 use PHPUnit\Framework\TestCase;
 
 final class OutlineTest extends TestCase {
@@ -35,11 +35,11 @@ final class OutlineTest extends TestCase {
 	}
 
 	private static function section( array ...$inner ): array {
-		return self::block( 'accessible-blocks/section', array(), $inner );
+		return self::block( 'guardrail-blocks/section', array(), $inner );
 	}
 
 	private static function heading( string $content ): array {
-		return self::block( 'accessible-blocks/heading', array( 'content' => $content ) );
+		return self::block( 'guardrail-blocks/heading', array( 'content' => $content ) );
 	}
 
 	public function test_levels_derive_from_section_nesting(): void {
@@ -135,17 +135,17 @@ final class OutlineTest extends TestCase {
 				self::section(
 					self::heading( 'Features' ),
 					self::block(
-						'accessible-blocks/card-grid',
+						'guardrail-blocks/card-grid',
 						array(),
 						array(
-							self::block( 'accessible-blocks/card', array(), array( self::heading( 'Card title' ) ) ),
+							self::block( 'guardrail-blocks/card', array(), array( self::heading( 'Card title' ) ) ),
 						)
 					),
 					self::block(
-						'accessible-blocks/accordion',
+						'guardrail-blocks/accordion',
 						array(),
 						array(
-							self::block( 'accessible-blocks/accordion-item', array( 'title' => 'Question?' ) ),
+							self::block( 'guardrail-blocks/accordion-item', array( 'title' => 'Question?' ) ),
 						)
 					)
 				),

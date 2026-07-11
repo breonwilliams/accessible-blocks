@@ -9,20 +9,20 @@
  * integration tests (wp-env) can be layered on later without changing
  * these suites.
  *
- * @package AccessibleBlocks\Tests
+ * @package GuardrailBlocks\Tests
  */
 
 declare( strict_types=1 );
 
 define( 'ABSPATH', __DIR__ . '/' );
 
-define( 'ACCESSIBLE_BLOCKS_PLUGIN_ROOT', dirname( __DIR__, 2 ) );
+define( 'GUARDRAIL_BLOCKS_PLUGIN_ROOT', dirname( __DIR__, 2 ) );
 
 /**
  * Test palette used by the wp_get_global_settings() stub. Tests may
  * overwrite this global to simulate different themes.
  */
-$GLOBALS['accessible_blocks_test_palette'] = array(
+$GLOBALS['guardrail_blocks_test_palette'] = array(
 	'theme' => array(
 		array(
 			'slug'  => 'primary',
@@ -176,7 +176,7 @@ if ( ! function_exists( 'get_post' ) ) {
 	 * @param int $post_id Post ID.
 	 */
 	function get_post( int $post_id ) {
-		$post = $GLOBALS['accessible_blocks_test_post'] ?? null;
+		$post = $GLOBALS['guardrail_blocks_test_post'] ?? null;
 		return ( $post && (int) $post->ID === $post_id ) ? $post : null;
 	}
 }
@@ -245,14 +245,14 @@ if ( ! function_exists( 'wp_get_global_settings' ) ) {
 	 */
 	function wp_get_global_settings( array $path = array() ) {
 		if ( array( 'color', 'palette' ) === $path ) {
-			return $GLOBALS['accessible_blocks_test_palette'];
+			return $GLOBALS['guardrail_blocks_test_palette'];
 		}
 		return array();
 	}
 }
 
-require_once ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/includes/class-contrast.php';
-require_once ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/includes/class-outline.php';
+require_once GUARDRAIL_BLOCKS_PLUGIN_ROOT . '/includes/class-contrast.php';
+require_once GUARDRAIL_BLOCKS_PLUGIN_ROOT . '/includes/class-outline.php';
 
 /**
  * Render a block template file the way WordPress does: with $attributes,
@@ -263,7 +263,7 @@ require_once ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/includes/class-outline.php';
  * @param array  $context    Block context.
  * @return string Rendered markup.
  */
-function accessible_blocks_test_render( string $file, array $attributes, array $context = array() ): string {
+function guardrail_blocks_test_render( string $file, array $attributes, array $context = array() ): string {
 	$content = '';
 	$block   = new class() {
 		/**

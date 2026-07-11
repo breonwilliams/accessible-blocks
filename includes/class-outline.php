@@ -7,12 +7,12 @@
  * the runtime does, and generates unique anchor ids so the Table of
  * Contents and the Accessible Heading render agree on link targets.
  *
- * @package AccessibleBlocks
+ * @package GuardrailBlocks
  */
 
 declare( strict_types=1 );
 
-namespace AccessibleBlocks;
+namespace GuardrailBlocks;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -104,9 +104,9 @@ class Outline {
 		// Blocks whose children's headings sit one level deeper (mirrors
 		// LEVEL_PROVIDER_BLOCKS in outline.ts).
 		$level_providers = array(
-			'accessible-blocks/section',
-			'accessible-blocks/card',
-			'accessible-blocks/accordion',
+			'guardrail-blocks/section',
+			'guardrail-blocks/card',
+			'guardrail-blocks/accordion',
 		);
 
 		foreach ( $blocks as $block ) {
@@ -118,7 +118,7 @@ class Outline {
 				continue;
 			}
 
-			if ( 'accessible-blocks/accordion-item' === $name ) {
+			if ( 'guardrail-blocks/accordion-item' === $name ) {
 				$text = wp_strip_all_tags( (string) ( $block['attrs']['title'] ?? '' ) );
 
 				if ( '' !== trim( $text ) ) {
@@ -136,7 +136,7 @@ class Outline {
 				continue;
 			}
 
-			if ( 'accessible-blocks/heading' === $name ) {
+			if ( 'guardrail-blocks/heading' === $name ) {
 				$text = wp_strip_all_tags( (string) ( $block['attrs']['content'] ?? '' ) );
 
 				if ( '' === trim( $text ) ) {

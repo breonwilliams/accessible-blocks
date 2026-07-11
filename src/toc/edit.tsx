@@ -26,13 +26,13 @@ export default function Edit() {
 	return (
 		<nav
 			{ ...blockProps }
-			aria-label={ __( 'Table of contents', 'accessible-blocks' ) }
+			aria-label={ __( 'Table of contents', 'guardrail-blocks' ) }
 		>
 			{ outline.length === 0 ? (
 				<Notice status="info" isDismissible={ false }>
 					{ __(
 						'Add headings to the page and they will appear here automatically.',
-						'accessible-blocks'
+						'guardrail-blocks'
 					) }
 				</Notice>
 			) : (
@@ -48,7 +48,7 @@ export default function Edit() {
 							} }
 						>
 							{ entry.text ||
-								__( '(empty heading)', 'accessible-blocks' ) }
+								__( '(empty heading)', 'guardrail-blocks' ) }
 						</li>
 					) ) }
 				</ol>

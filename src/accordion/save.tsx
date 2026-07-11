@@ -8,7 +8,7 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 export default function save() {
 	const blockProps = useBlockProps.save( {
-		'data-wp-interactive': 'accessible-blocks/accordion',
+		'data-wp-interactive': 'guardrail-blocks/accordion',
 	} );
 	const innerBlocksProps = useInnerBlocksProps.save( blockProps );
 

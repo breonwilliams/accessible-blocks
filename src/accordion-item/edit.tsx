@@ -46,13 +46,13 @@ export default function Edit( {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Accessibility', 'accessible-blocks' ) }>
+				<PanelBody title={ __( 'Accessibility', 'guardrail-blocks' ) }>
 					<Notice status="success" isDismissible={ false }>
 						{ sprintf(
 							/* translators: %d: heading level number (2-6). */
 							__(
 								'Renders as an H%d header button with ARIA disclosure semantics and keyboard support — nothing to configure.',
-								'accessible-blocks'
+								'guardrail-blocks'
 							),
 							level
 						) }
@@ -72,7 +72,7 @@ export default function Edit( {
 							onChange={ ( title ) => setAttributes( { title } ) }
 							placeholder={ __(
 								'Accordion title…',
-								'accessible-blocks'
+								'guardrail-blocks'
 							) }
 							allowedFormats={ [] }
 						/>

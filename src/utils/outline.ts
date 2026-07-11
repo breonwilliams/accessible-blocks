@@ -11,12 +11,12 @@
  */
 
 /** The context key Sections provide and Headings consume. */
-export const HEADING_LEVEL_CONTEXT = 'accessible-blocks/headingLevel';
+export const HEADING_LEVEL_CONTEXT = 'guardrail-blocks/headingLevel';
 
-export const SECTION_BLOCK = 'accessible-blocks/section';
-export const HEADING_BLOCK = 'accessible-blocks/heading';
+export const SECTION_BLOCK = 'guardrail-blocks/section';
+export const HEADING_BLOCK = 'guardrail-blocks/heading';
 export const CORE_HEADING_BLOCK = 'core/heading';
-export const ACCORDION_ITEM_BLOCK = 'accessible-blocks/accordion-item';
+export const ACCORDION_ITEM_BLOCK = 'guardrail-blocks/accordion-item';
 
 /**
  * Blocks that provide a heading level one deeper than their context:
@@ -25,8 +25,8 @@ export const ACCORDION_ITEM_BLOCK = 'accessible-blocks/accordion-item';
  */
 export const LEVEL_PROVIDER_BLOCKS = [
 	SECTION_BLOCK,
-	'accessible-blocks/card',
-	'accessible-blocks/accordion',
+	'guardrail-blocks/card',
+	'guardrail-blocks/accordion',
 ];
 
 /**

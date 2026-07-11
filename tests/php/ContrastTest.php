@@ -1,14 +1,14 @@
 <?php
 /**
- * Tests for AccessibleBlocks\Contrast — must stay in lockstep with the
+ * Tests for GuardrailBlocks\Contrast — must stay in lockstep with the
  * Jest suite for src/utils/contrast.ts (same cases, same expected values).
  *
- * @package AccessibleBlocks\Tests
+ * @package GuardrailBlocks\Tests
  */
 
 declare( strict_types=1 );
 
-use AccessibleBlocks\Contrast;
+use GuardrailBlocks\Contrast;
 use PHPUnit\Framework\TestCase;
 
 final class ContrastTest extends TestCase {
@@ -213,9 +213,9 @@ final class ContrastTest extends TestCase {
 	}
 
 	public function test_theme_palette_wins_over_core_defaults(): void {
-		$original = $GLOBALS['accessible_blocks_test_palette'];
+		$original = $GLOBALS['guardrail_blocks_test_palette'];
 
-		$GLOBALS['accessible_blocks_test_palette'] = array(
+		$GLOBALS['guardrail_blocks_test_palette'] = array(
 			'default' => array(
 				array(
 					'slug'  => 'black',
@@ -239,7 +239,7 @@ final class ContrastTest extends TestCase {
 		$result = Contrast::pick_accessible_foreground( '#f2f5f7' );
 		$this->assertSame( 'brand-dark', $result['foreground']['slug'] );
 
-		$GLOBALS['accessible_blocks_test_palette'] = $original;
+		$GLOBALS['guardrail_blocks_test_palette'] = $original;
 	}
 
 	public function test_color_for_slug_reads_live_palette(): void {

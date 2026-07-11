@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "accessible-blocks/accordion",
+	"name": "guardrail-blocks/accordion",
 	"version": "0.1.0",
 	"title": "Accessible Accordion",
 	"category": "design",
 	"icon": "menu-alt3",
 	"description": "Expandable content panels with correct disclosure semantics and full keyboard support built in — Enter/Space to toggle, arrow keys to move between headers, screen-reader announcements for free.",
 	"keywords": [ "accordion", "faq", "toggle", "collapse", "accessible" ],
-	"textdomain": "accessible-blocks",
+	"textdomain": "guardrail-blocks",
 	"attributes": {
 		"headingLevel": {
 			"type": "number",
@@ -16,9 +16,9 @@
 		}
 	},
 	"providesContext": {
-		"accessible-blocks/headingLevel": "headingLevel"
+		"guardrail-blocks/headingLevel": "headingLevel"
 	},
-	"usesContext": [ "accessible-blocks/headingLevel" ],
+	"usesContext": [ "guardrail-blocks/headingLevel" ],
 	"supports": {
 		"html": false,
 		"anchor": true,

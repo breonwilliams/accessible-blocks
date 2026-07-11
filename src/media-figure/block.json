@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "accessible-blocks/media-figure",
+	"name": "guardrail-blocks/media-figure",
 	"version": "0.1.0",
 	"title": "Media Figure",
 	"category": "media",
 	"icon": "format-image",
 	"description": "An image with performance-correct markup guaranteed: responsive sizes, explicit dimensions (no layout shift), smart loading priority, and enforced alt text.",
 	"keywords": [ "image", "figure", "photo", "media", "accessible" ],
-	"textdomain": "accessible-blocks",
+	"textdomain": "guardrail-blocks",
 	"attributes": {
 		"mediaId": {
 			"type": "number",

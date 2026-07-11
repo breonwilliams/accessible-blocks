@@ -17,55 +17,55 @@
  * @var string   $content    Inner content (unused; dynamic).
  * @var WP_Block $block      Block instance.
  *
- * @package AccessibleBlocks
+ * @package GuardrailBlocks
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$accessible_blocks_media_id = isset( $attributes['mediaId'] ) ? (int) $attributes['mediaId'] : 0;
+$guardrail_blocks_media_id = isset( $attributes['mediaId'] ) ? (int) $attributes['mediaId'] : 0;
 
-if ( ! $accessible_blocks_media_id || ! wp_attachment_is_image( $accessible_blocks_media_id ) ) {
+if ( ! $guardrail_blocks_media_id || ! wp_attachment_is_image( $guardrail_blocks_media_id ) ) {
 	return;
 }
 
-$accessible_blocks_alt     = isset( $attributes['alt'] ) ? trim( (string) $attributes['alt'] ) : '';
-$accessible_blocks_caption = isset( $attributes['caption'] ) ? trim( (string) $attributes['caption'] ) : '';
-$accessible_blocks_is_hero = ! empty( $attributes['isHero'] );
+$guardrail_blocks_alt     = isset( $attributes['alt'] ) ? trim( (string) $attributes['alt'] ) : '';
+$guardrail_blocks_caption = isset( $attributes['caption'] ) ? trim( (string) $attributes['caption'] ) : '';
+$guardrail_blocks_is_hero = ! empty( $attributes['isHero'] );
 
-$accessible_blocks_img_attrs = array(
+$guardrail_blocks_img_attrs = array(
 	// Accurate sizes: content images render at content width, not viewport.
 	'sizes' => '(max-width: 782px) 100vw, 782px',
 );
 
-if ( '' !== $accessible_blocks_alt ) {
-	$accessible_blocks_img_attrs['alt'] = $accessible_blocks_alt;
+if ( '' !== $guardrail_blocks_alt ) {
+	$guardrail_blocks_img_attrs['alt'] = $guardrail_blocks_alt;
 }
 
-if ( $accessible_blocks_is_hero ) {
-	$accessible_blocks_img_attrs['fetchpriority'] = 'high';
-	$accessible_blocks_img_attrs['loading']       = 'eager';
+if ( $guardrail_blocks_is_hero ) {
+	$guardrail_blocks_img_attrs['fetchpriority'] = 'high';
+	$guardrail_blocks_img_attrs['loading']       = 'eager';
 } else {
-	$accessible_blocks_img_attrs['loading'] = 'lazy';
+	$guardrail_blocks_img_attrs['loading'] = 'lazy';
 }
 
-$accessible_blocks_image = wp_get_attachment_image(
-	$accessible_blocks_media_id,
+$guardrail_blocks_image = wp_get_attachment_image(
+	$guardrail_blocks_media_id,
 	'large',
 	false,
-	$accessible_blocks_img_attrs
+	$guardrail_blocks_img_attrs
 );
 
-if ( '' === $accessible_blocks_image ) {
+if ( '' === $guardrail_blocks_image ) {
 	return;
 }
 
 printf(
 	'<figure %1$s>%2$s%3$s</figure>',
 	get_block_wrapper_attributes(), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Pre-escaped by core.
-	$accessible_blocks_image, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Built by wp_get_attachment_image().
-	'' !== $accessible_blocks_caption
-		? '<figcaption class="ab-media-figure__caption">' . wp_kses_post( $accessible_blocks_caption ) . '</figcaption>'
+	$guardrail_blocks_image, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Built by wp_get_attachment_image().
+	'' !== $guardrail_blocks_caption
+		? '<figcaption class="ab-media-figure__caption">' . wp_kses_post( $guardrail_blocks_caption ) . '</figcaption>'
 		: ''
 );

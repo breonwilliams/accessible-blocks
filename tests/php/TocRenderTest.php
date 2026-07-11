@@ -2,17 +2,17 @@
 /**
  * Render tests for the Table of Contents dynamic block.
  *
- * @package AccessibleBlocks\Tests
+ * @package GuardrailBlocks\Tests
  */
 
 declare( strict_types=1 );
 
-use AccessibleBlocks\Outline;
+use GuardrailBlocks\Outline;
 use PHPUnit\Framework\TestCase;
 
 final class TocRenderTest extends TestCase {
 
-	private const TEMPLATE = ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/src/toc/render.php';
+	private const TEMPLATE = GUARDRAIL_BLOCKS_PLUGIN_ROOT . '/src/toc/render.php';
 
 	protected function setUp(): void {
 		Outline::reset_anchors();
@@ -27,7 +27,7 @@ final class TocRenderTest extends TestCase {
 		$post->ID           = 7;
 		$post->post_content = (string) json_encode( $parsed_blocks ); // phpcs:ignore
 
-		$GLOBALS['accessible_blocks_test_post'] = $post;
+		$GLOBALS['guardrail_blocks_test_post'] = $post;
 
 		$attributes = array();
 		$content    = '';
@@ -64,10 +64,10 @@ final class TocRenderTest extends TestCase {
 		$html = $this->render(
 			array(
 				self::block(
-					'accessible-blocks/section',
+					'guardrail-blocks/section',
 					array(),
 					array(
-						self::block( 'accessible-blocks/heading', array( 'content' => 'Overview' ) ),
+						self::block( 'guardrail-blocks/heading', array( 'content' => 'Overview' ) ),
 					)
 				),
 			)
@@ -82,15 +82,15 @@ final class TocRenderTest extends TestCase {
 		$html = $this->render(
 			array(
 				self::block(
-					'accessible-blocks/section',
+					'guardrail-blocks/section',
 					array(),
 					array(
-						self::block( 'accessible-blocks/heading', array( 'content' => 'Parent' ) ),
+						self::block( 'guardrail-blocks/heading', array( 'content' => 'Parent' ) ),
 						self::block(
-							'accessible-blocks/section',
+							'guardrail-blocks/section',
 							array(),
 							array(
-								self::block( 'accessible-blocks/heading', array( 'content' => 'Child' ) ),
+								self::block( 'guardrail-blocks/heading', array( 'content' => 'Child' ) ),
 							)
 						),
 					)
@@ -126,11 +126,11 @@ final class TocRenderTest extends TestCase {
 		// produce identical anchors for the same document order.
 		$parsed = array(
 			self::block(
-				'accessible-blocks/section',
+				'guardrail-blocks/section',
 				array(),
 				array(
-					self::block( 'accessible-blocks/heading', array( 'content' => 'Overview' ) ),
-					self::block( 'accessible-blocks/heading', array( 'content' => 'Overview' ) ),
+					self::block( 'guardrail-blocks/heading', array( 'content' => 'Overview' ) ),
+					self::block( 'guardrail-blocks/heading', array( 'content' => 'Overview' ) ),
 				)
 			),
 		);

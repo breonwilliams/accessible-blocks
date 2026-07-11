@@ -3,7 +3,7 @@
  * Render tests for the Accessible Button dynamic block (Guarantee A,
  * enforcement layer 3).
  *
- * @package AccessibleBlocks\Tests
+ * @package GuardrailBlocks\Tests
  */
 
 declare( strict_types=1 );
@@ -12,13 +12,13 @@ use PHPUnit\Framework\TestCase;
 
 final class ButtonRenderTest extends TestCase {
 
-	private const TEMPLATE = ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/src/button/render.php';
+	private const TEMPLATE = GUARDRAIL_BLOCKS_PLUGIN_ROOT . '/src/button/render.php';
 
 	/**
 	 * @param array $attributes Attributes.
 	 */
 	private function render( array $attributes ): string {
-		return accessible_blocks_test_render( self::TEMPLATE, $attributes );
+		return guardrail_blocks_test_render( self::TEMPLATE, $attributes );
 	}
 
 	public function test_derives_foreground_from_live_palette(): void {

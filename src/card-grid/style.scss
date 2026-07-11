@@ -3,7 +3,7 @@
  * sensible minimum, gap from the theme's blockGap when set.
  */
 
-.wp-block-accessible-blocks-card-grid {
+.wp-block-guardrail-blocks-card-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
 	gap: var(--wp--style--block-gap, 1.5rem);

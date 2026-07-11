@@ -1,5 +1,5 @@
 {
-	"name": "accessible-blocks",
+	"name": "guardrail-blocks",
 	"version": "0.1.0",
 	"description": "Accessibility-first blocks with WCAG-safe color contrast and unbreakable heading hierarchy — enforced by design.",
 	"author": "Breon Williams",
@@ -19,7 +19,7 @@
 		"plugin-zip": "wp-scripts plugin-zip"
 	},
 	"files": [
-		"accessible-blocks.php",
+		"guardrail-blocks.php",
 		"includes",
 		"build",
 		"readme.txt"

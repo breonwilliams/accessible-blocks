@@ -6,15 +6,15 @@
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
 const ACCORDION_CONTENT = `
-<!-- wp:accessible-blocks/accordion -->
-<div class="wp-block-accessible-blocks-accordion" data-wp-interactive="accessible-blocks/accordion"><!-- wp:accessible-blocks/accordion-item {"title":"First question"} -->
+<!-- wp:guardrail-blocks/accordion -->
+<div class="wp-block-guardrail-blocks-accordion" data-wp-interactive="guardrail-blocks/accordion"><!-- wp:guardrail-blocks/accordion-item {"title":"First question"} -->
 <!-- wp:paragraph --><p>First answer.</p><!-- /wp:paragraph -->
-<!-- /wp:accessible-blocks/accordion-item -->
+<!-- /wp:guardrail-blocks/accordion-item -->
 
-<!-- wp:accessible-blocks/accordion-item {"title":"Second question"} -->
+<!-- wp:guardrail-blocks/accordion-item {"title":"Second question"} -->
 <!-- wp:paragraph --><p>Second answer.</p><!-- /wp:paragraph -->
-<!-- /wp:accessible-blocks/accordion-item --></div>
-<!-- /wp:accessible-blocks/accordion -->
+<!-- /wp:guardrail-blocks/accordion-item --></div>
+<!-- /wp:guardrail-blocks/accordion -->
 `;
 
 test.describe( 'Accordion keyboard interaction (front end)', () => {

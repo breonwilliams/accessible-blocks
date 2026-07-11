@@ -32,14 +32,14 @@ function issueMessage( issue: OutlineIssue ): string {
 	if ( issue.type === 'multiple-h1' ) {
 		return __(
 			'Extra H1 — the page title is already the H1.',
-			'accessible-blocks'
+			'guardrail-blocks'
 		);
 	}
 	return sprintf(
 		/* translators: 1: heading level found, 2: deepest valid level. */
 		__(
 			'H%1$d skips levels — H%2$d is the deepest valid here.',
-			'accessible-blocks'
+			'guardrail-blocks'
 		),
 		issue.level,
 		issue.expectedMax
@@ -63,15 +63,15 @@ function OutlineCheckerPanel() {
 
 	return (
 		<PluginDocumentSettingPanel
-			name="accessible-blocks-outline-checker"
-			title={ __( 'Heading outline', 'accessible-blocks' ) }
+			name="guardrail-blocks-outline-checker"
+			title={ __( 'Heading outline', 'guardrail-blocks' ) }
 			className="ab-outline-checker"
 		>
 			{ outline.length === 0 && (
 				<p>
 					{ __(
 						'No headings yet. The page title is the H1.',
-						'accessible-blocks'
+						'guardrail-blocks'
 					) }
 				</p>
 			) }
@@ -79,7 +79,7 @@ function OutlineCheckerPanel() {
 				<Notice status="success" isDismissible={ false }>
 					{ __(
 						'Outline is valid — no skipped levels, no extra H1s.',
-						'accessible-blocks'
+						'guardrail-blocks'
 					) }
 				</Notice>
 			) }
@@ -103,7 +103,7 @@ function OutlineCheckerPanel() {
 									/* translators: 1: heading level, 2: heading text. */
 									__(
 										'Select heading level %1$d: %2$s',
-										'accessible-blocks'
+										'guardrail-blocks'
 									),
 									entry.level,
 									entry.text
@@ -113,10 +113,10 @@ function OutlineCheckerPanel() {
 								{ entry.text ||
 									__(
 										'(empty heading)',
-										'accessible-blocks'
+										'guardrail-blocks'
 									) }
 								{ entry.source === 'manual'
-									? ' ' + __( '(core)', 'accessible-blocks' )
+									? ' ' + __( '(core)', 'guardrail-blocks' )
 									: '' }
 							</Button>
 							{ issue && (
@@ -135,6 +135,6 @@ function OutlineCheckerPanel() {
 	);
 }
 
-registerPlugin( 'accessible-blocks-outline-checker', {
+registerPlugin( 'guardrail-blocks-outline-checker', {
 	render: OutlineCheckerPanel,
 } );

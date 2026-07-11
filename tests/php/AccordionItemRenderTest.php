@@ -3,7 +3,7 @@
  * Render tests for the Accordion Item dynamic block (ARIA disclosure
  * pattern, enforcement layer 3).
  *
- * @package AccessibleBlocks\Tests
+ * @package GuardrailBlocks\Tests
  */
 
 declare( strict_types=1 );
@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 final class AccordionItemRenderTest extends TestCase {
 
-	private const TEMPLATE = ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/src/accordion-item/render.php';
+	private const TEMPLATE = GUARDRAIL_BLOCKS_PLUGIN_ROOT . '/src/accordion-item/render.php';
 
 	/**
 	 * @param array  $attributes Attributes.
@@ -58,13 +58,13 @@ final class AccordionItemRenderTest extends TestCase {
 
 		$nested = $this->render(
 			array( 'title' => 'T' ),
-			array( 'accessible-blocks/headingLevel' => 4 )
+			array( 'guardrail-blocks/headingLevel' => 4 )
 		);
 		$this->assertStringContainsString( '<h4 class="ab-accordion-item__heading">', $nested );
 
 		$overflow = $this->render(
 			array( 'title' => 'T' ),
-			array( 'accessible-blocks/headingLevel' => 42 )
+			array( 'guardrail-blocks/headingLevel' => 42 )
 		);
 		$this->assertStringContainsString( '<h6 class="ab-accordion-item__heading">', $overflow );
 	}
@@ -82,7 +82,7 @@ final class AccordionItemRenderTest extends TestCase {
 	public function test_interactivity_directives_present(): void {
 		$html = $this->render( array( 'title' => 'T' ) );
 
-		$this->assertStringContainsString( 'data-wp-interactive="accessible-blocks/accordion"', $html );
+		$this->assertStringContainsString( 'data-wp-interactive="guardrail-blocks/accordion"', $html );
 		$this->assertStringContainsString( 'data-wp-on--click="actions.toggle"', $html );
 		$this->assertStringContainsString( 'data-wp-on--keydown="actions.handleKeydown"', $html );
 		$this->assertStringContainsString( 'data-wp-bind--aria-expanded="context.isOpen"', $html );

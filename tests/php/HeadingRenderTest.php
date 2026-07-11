@@ -3,7 +3,7 @@
  * Render tests for the Accessible Heading dynamic block (Guarantee B,
  * enforcement layer 3).
  *
- * @package AccessibleBlocks\Tests
+ * @package GuardrailBlocks\Tests
  */
 
 declare( strict_types=1 );
@@ -12,20 +12,20 @@ use PHPUnit\Framework\TestCase;
 
 final class HeadingRenderTest extends TestCase {
 
-	private const TEMPLATE = ACCESSIBLE_BLOCKS_PLUGIN_ROOT . '/src/heading/render.php';
+	private const TEMPLATE = GUARDRAIL_BLOCKS_PLUGIN_ROOT . '/src/heading/render.php';
 
 	/**
 	 * @param array $attributes Attributes.
 	 * @param array $context    Context.
 	 */
 	private function render( array $attributes, array $context = array() ): string {
-		return accessible_blocks_test_render( self::TEMPLATE, $attributes, $context );
+		return guardrail_blocks_test_render( self::TEMPLATE, $attributes, $context );
 	}
 
 	public function test_renders_level_from_context(): void {
 		$html = $this->render(
 			array( 'content' => 'Hello' ),
-			array( 'accessible-blocks/headingLevel' => 3 )
+			array( 'guardrail-blocks/headingLevel' => 3 )
 		);
 
 		$this->assertStringStartsWith( '<h3 ', $html );
@@ -42,7 +42,7 @@ final class HeadingRenderTest extends TestCase {
 	public function test_clamps_overflow_to_h6(): void {
 		$html = $this->render(
 			array( 'content' => 'Deep' ),
-			array( 'accessible-blocks/headingLevel' => 9 )
+			array( 'guardrail-blocks/headingLevel' => 9 )
 		);
 
 		$this->assertStringStartsWith( '<h6 ', $html );
@@ -52,7 +52,7 @@ final class HeadingRenderTest extends TestCase {
 		// The page title owns H1 — context can never produce another one.
 		$html = $this->render(
 			array( 'content' => 'Sneaky' ),
-			array( 'accessible-blocks/headingLevel' => 1 )
+			array( 'guardrail-blocks/headingLevel' => 1 )
 		);
 
 		$this->assertStringStartsWith( '<h2 ', $html );
@@ -61,7 +61,7 @@ final class HeadingRenderTest extends TestCase {
 	public function test_clamps_garbage_context_safely(): void {
 		$html = $this->render(
 			array( 'content' => 'Junk-proof' ),
-			array( 'accessible-blocks/headingLevel' => 'potato' )
+			array( 'guardrail-blocks/headingLevel' => 'potato' )
 		);
 
 		$this->assertStringStartsWith( '<h2 ', $html );

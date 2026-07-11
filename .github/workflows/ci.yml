@@ -65,12 +65,12 @@ jobs:
         # The directory name becomes the plugin slug Plugin Check validates
         # against, so it must match the text domain.
         run: |
-          mkdir -p dist/accessible-blocks
-          cp -r accessible-blocks.php readme.txt includes build dist/accessible-blocks/
+          mkdir -p dist/guardrail-blocks
+          cp -r guardrail-blocks.php readme.txt includes build dist/guardrail-blocks/
       - name: Run Plugin Check
         uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: './dist/accessible-blocks'
+          build-dir: './dist/guardrail-blocks'
 
   e2e:
     name: E2E — Playwright + wp-env

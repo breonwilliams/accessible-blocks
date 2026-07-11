@@ -24,7 +24,7 @@ const TRIGGER_SELECTOR = '.ab-accordion-item__trigger';
  * @param target Event target (a trigger button).
  */
 function getTriggers( target: HTMLElement ): HTMLElement[] {
-	const accordion = target.closest( '.wp-block-accessible-blocks-accordion' );
+	const accordion = target.closest( '.wp-block-guardrail-blocks-accordion' );
 	return accordion
 		? ( Array.from(
 				accordion.querySelectorAll( TRIGGER_SELECTOR )
@@ -32,7 +32,7 @@ function getTriggers( target: HTMLElement ): HTMLElement[] {
 		: [];
 }
 
-store( 'accessible-blocks/accordion', {
+store( 'guardrail-blocks/accordion', {
 	actions: {
 		toggle(): void {
 			const context = getContext< AccordionItemContext >();

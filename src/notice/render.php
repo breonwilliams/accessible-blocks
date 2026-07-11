@@ -11,7 +11,7 @@
  * @var string   $content    Inner blocks (notice body).
  * @var WP_Block $block      Block instance.
  *
- * @package AccessibleBlocks
+ * @package GuardrailBlocks
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,36 +22,36 @@ if ( '' === trim( (string) $content ) ) {
 	return;
 }
 
-$accessible_blocks_type = isset( $attributes['type'] ) ? (string) $attributes['type'] : 'info';
+$guardrail_blocks_type = isset( $attributes['type'] ) ? (string) $attributes['type'] : 'info';
 
-if ( ! in_array( $accessible_blocks_type, array( 'info', 'success', 'warning', 'error' ), true ) ) {
-	$accessible_blocks_type = 'info';
+if ( ! in_array( $guardrail_blocks_type, array( 'info', 'success', 'warning', 'error' ), true ) ) {
+	$guardrail_blocks_type = 'info';
 }
 
-$accessible_blocks_roles = array(
+$guardrail_blocks_roles = array(
 	'info'    => 'note',
 	'success' => 'status',
 	'warning' => 'status',
 	'error'   => 'alert',
 );
 
-$accessible_blocks_labels = array(
-	'info'    => __( 'Note', 'accessible-blocks' ),
-	'success' => __( 'Success', 'accessible-blocks' ),
-	'warning' => __( 'Warning', 'accessible-blocks' ),
-	'error'   => __( 'Error', 'accessible-blocks' ),
+$guardrail_blocks_labels = array(
+	'info'    => __( 'Note', 'guardrail-blocks' ),
+	'success' => __( 'Success', 'guardrail-blocks' ),
+	'warning' => __( 'Warning', 'guardrail-blocks' ),
+	'error'   => __( 'Error', 'guardrail-blocks' ),
 );
 
-$accessible_blocks_wrapper = get_block_wrapper_attributes(
+$guardrail_blocks_wrapper = get_block_wrapper_attributes(
 	array(
-		'class' => 'ab-notice ab-notice--' . $accessible_blocks_type,
-		'role'  => $accessible_blocks_roles[ $accessible_blocks_type ],
+		'class' => 'ab-notice ab-notice--' . $guardrail_blocks_type,
+		'role'  => $guardrail_blocks_roles[ $guardrail_blocks_type ],
 	)
 );
 
 printf(
 	'<div %1$s><strong class="ab-notice__label">%2$s</strong><div class="ab-notice__content">%3$s</div></div>',
-	$accessible_blocks_wrapper, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Pre-escaped by core.
-	esc_html( $accessible_blocks_labels[ $accessible_blocks_type ] ),
+	$guardrail_blocks_wrapper, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Pre-escaped by core.
+	esc_html( $guardrail_blocks_labels[ $guardrail_blocks_type ] ),
 	$content // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Inner blocks, escaped during their own render.
 );

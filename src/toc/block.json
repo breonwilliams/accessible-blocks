@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "accessible-blocks/table-of-contents",
+	"name": "guardrail-blocks/table-of-contents",
 	"version": "0.1.0",
 	"title": "Table of Contents",
 	"category": "design",
 	"icon": "list-view",
 	"description": "A table of contents generated from the page's real heading outline on every view — reorder your sections and it stays correct, automatically.",
 	"keywords": [ "toc", "table of contents", "outline", "navigation", "accessible" ],
-	"textdomain": "accessible-blocks",
+	"textdomain": "guardrail-blocks",
 	"attributes": {},
 	"usesContext": [ "postId" ],
 	"supports": {
