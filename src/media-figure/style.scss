@@ -9,6 +9,9 @@
 		display: block;
 		max-width: 100%;
 		height: auto;
+		// Follows the wrapper's core border-radius support, so authors can
+		// round images without any custom control.
+		border-radius: inherit;
 	}
 
 	.ab-media-figure__caption {

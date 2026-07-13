@@ -31,6 +31,9 @@
 	"supports": {
 		"html": false,
 		"color": false,
+		"__experimentalBorder": {
+			"radius": true
+		},
 		"typography": {
 			"fontSize": true
 		},

@@ -23,8 +23,18 @@
 		"html": false,
 		"anchor": true,
 		"align": [ "wide" ],
+		"__experimentalBorder": {
+			"radius": true,
+			"color": true,
+			"width": true,
+			"style": true
+		},
 		"spacing": {
-			"margin": true
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true
 		},
 		"interactivity": true
 	},

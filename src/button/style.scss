@@ -11,6 +11,10 @@
  */
 
 .wp-block-guardrail-blocks-button {
+	// Default radius lives on the wrapper so the core border-radius support
+	// (which styles the wrapper) overrides it naturally; the visible button
+	// inherits whichever wins. The wrapper itself paints nothing.
+	border-radius: 0.25em;
 
 	.ab-button {
 		display: inline-flex;
@@ -21,7 +25,7 @@
 		min-width: 44px;
 		padding: 0.6em 1.4em;
 		border: none;
-		border-radius: 0.25em;
+		border-radius: inherit;
 		text-decoration: none;
 		cursor: pointer;
 		line-height: 1.2;

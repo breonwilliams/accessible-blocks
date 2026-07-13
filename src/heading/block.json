@@ -20,6 +20,9 @@
 		"html": false,
 		"typography": {
 			"fontSize": true
+		},
+		"spacing": {
+			"margin": true
 		}
 	},
 	"example": {

@@ -22,6 +22,9 @@
 		"spacing": {
 			"margin": true,
 			"padding": true
+		},
+		"typography": {
+			"fontSize": true
 		}
 	},
 	"variations": [

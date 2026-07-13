@@ -23,7 +23,7 @@
 	"supports": {
 		"html": false,
 		"reusable": false,
-		"border": {
+		"__experimentalBorder": {
 			"radius": true,
 			"color": true,
 			"width": true,
