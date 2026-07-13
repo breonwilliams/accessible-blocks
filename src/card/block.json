@@ -23,6 +23,12 @@
 	"supports": {
 		"html": false,
 		"reusable": false,
+		"border": {
+			"radius": true,
+			"color": true,
+			"width": true,
+			"style": true
+		},
 		"spacing": {
 			"padding": true
 		}
