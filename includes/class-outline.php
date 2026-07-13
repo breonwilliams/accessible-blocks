@@ -92,6 +92,75 @@ class Outline {
 	}
 
 	/**
+	 * Render-time enforcement of Guarantee B (`render_block_data` filter).
+	 *
+	 * Level providers (Section, Card, Accordion) serve heading context from a
+	 * stored `headingLevel` attribute that the editor keeps in sync. The
+	 * stored value is a cache, not a source of truth — it can briefly go
+	 * stale (e.g. a save that races the editor's self-heal cascade after a
+	 * deep reorder). This filter rewrites every provider's attribute from the
+	 * block tree's *actual* nesting before each render, using the exact
+	 * derivation rules of walk()/outline.ts, so a stale stored level can
+	 * never reach the page.
+	 *
+	 * Since WP 6.5, core applies `render_block_data` not only to top-level
+	 * blocks (render_block()) but *again* to every inner block during
+	 * WP_Block::render(). Those inner applications carry no ancestry, so
+	 * re-deriving there would treat every nested provider as top-level and
+	 * flatten the outline. Top-level applications have `$parent_block` null;
+	 * inner ones pass the parent WP_Block — so we rewrite the whole tree once
+	 * at the top level and no-op for inner re-applications.
+	 *
+	 * @param array         $parsed_block A parsed block, possibly with children.
+	 * @param array|null    $source_block Unfiltered copy (unused).
+	 * @param \WP_Block|null $parent_block Parent block for inner applications,
+	 *                                     null for top-level blocks.
+	 * @return array The block with structurally-derived heading levels.
+	 */
+	public static function enforce_levels_filter( $parsed_block, $source_block = null, $parent_block = null ) {
+		if ( ! is_array( $parsed_block ) || null !== $parent_block ) {
+			return $parsed_block;
+		}
+
+		return self::enforce_levels( $parsed_block );
+	}
+
+	/**
+	 * Recursively rewrite provider heading levels from actual nesting.
+	 *
+	 * @param array    $parsed_block  A parsed block, possibly with children.
+	 * @param int|null $context_level Level provided by the nearest enclosing
+	 *                                provider (null at the document root).
+	 * @return array The block with structurally-derived heading levels.
+	 */
+	public static function enforce_levels( array $parsed_block, ?int $context_level = null ): array {
+		$level_providers = array(
+			'guardrail-blocks/section',
+			'guardrail-blocks/card',
+			'guardrail-blocks/accordion',
+		);
+
+		$child_context = $context_level;
+
+		if ( in_array( $parsed_block['blockName'] ?? '', $level_providers, true ) ) {
+			$derived = null === $context_level ? self::MIN_LEVEL : self::clamp_level( $context_level + 1 );
+
+			$parsed_block['attrs']                 = is_array( $parsed_block['attrs'] ?? null ) ? $parsed_block['attrs'] : array();
+			$parsed_block['attrs']['headingLevel'] = $derived;
+
+			$child_context = $derived;
+		}
+
+		if ( ! empty( $parsed_block['innerBlocks'] ) ) {
+			foreach ( $parsed_block['innerBlocks'] as $i => $inner_block ) {
+				$parsed_block['innerBlocks'][ $i ] = self::enforce_levels( $inner_block, $child_context );
+			}
+		}
+
+		return $parsed_block;
+	}
+
+	/**
 	 * Recursive walker.
 	 *
 	 * @param array             $blocks        Parsed blocks.

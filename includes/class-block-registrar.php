@@ -43,6 +43,11 @@ class Block_Registrar {
 	 */
 	public function register_hooks(): void {
 		add_action( 'init', array( $this, 'register_blocks' ) );
+
+		// Guarantee B, render-time layer: derive provider heading levels from
+		// the block tree's actual nesting on every render, so a stale stored
+		// attribute can never produce a wrong level (see Outline).
+		add_filter( 'render_block_data', array( Outline::class, 'enforce_levels_filter' ), 10, 3 );
 	}
 
 	/**
