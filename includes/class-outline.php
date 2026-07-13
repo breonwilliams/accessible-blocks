@@ -111,8 +111,8 @@ class Outline {
 	 * inner ones pass the parent WP_Block — so we rewrite the whole tree once
 	 * at the top level and no-op for inner re-applications.
 	 *
-	 * @param array         $parsed_block A parsed block, possibly with children.
-	 * @param array|null    $source_block Unfiltered copy (unused).
+	 * @param array          $parsed_block A parsed block, possibly with children.
+	 * @param array|null     $source_block Unfiltered copy (unused).
 	 * @param \WP_Block|null $parent_block Parent block for inner applications,
 	 *                                     null for top-level blocks.
 	 * @return array The block with structurally-derived heading levels.
