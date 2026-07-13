@@ -53,6 +53,53 @@ final class ButtonRenderTest extends TestCase {
 		$this->assertStringNotContainsString( '<a ', $html );
 	}
 
+	public function test_uniform_border_radius_is_inlined_on_the_button(): void {
+		// Border support with skip-serialization: the radius must land on the
+		// visible element (beats theme wp-element-button rules), not the
+		// wrapper.
+		$html = $this->render(
+			array(
+				'text'  => 'Go',
+				'style' => array( 'border' => array( 'radius' => '999px' ) ),
+			)
+		);
+
+		$this->assertStringContainsString( 'style="border-radius:999px;"', $html );
+	}
+
+	public function test_split_border_radius_renders_each_corner(): void {
+		$html = $this->render(
+			array(
+				'text'  => 'Go',
+				'style' => array(
+					'border' => array(
+						'radius' => array(
+							'topLeft'     => '4px',
+							'bottomRight' => '12px',
+						),
+					),
+				),
+			)
+		);
+
+		$this->assertStringContainsString( 'border-top-left-radius:4px;', $html );
+		$this->assertStringContainsString( 'border-bottom-right-radius:12px;', $html );
+		$this->assertStringNotContainsString( 'border-top-right-radius', $html );
+	}
+
+	public function test_radius_appends_to_color_styles(): void {
+		$html = $this->render(
+			array(
+				'text'           => 'Go',
+				'backgroundSlug' => 'primary',
+				'style'          => array( 'border' => array( 'radius' => '8px' ) ),
+			)
+		);
+
+		$this->assertStringContainsString( 'color:#ffffff;', $html );
+		$this->assertStringContainsString( 'border-radius:8px;', $html );
+	}
+
 	public function test_renders_nothing_for_empty_text(): void {
 		$this->assertSame( '', $this->render( array( 'text' => '' ) ) );
 		$this->assertSame( '', $this->render( array() ) );

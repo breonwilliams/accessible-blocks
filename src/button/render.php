@@ -47,6 +47,28 @@ if ( null !== $guardrail_blocks_bgcolor ) {
 	}
 }
 
+// Border radius (core border support, skip-serialization): applied inline on
+// the visible element — not the wrapper — so it wins over theme
+// wp-element-button rules in any cascade order. Mirrors edit.tsx.
+$guardrail_blocks_radius = $attributes['style']['border']['radius'] ?? null;
+
+if ( is_string( $guardrail_blocks_radius ) && '' !== trim( $guardrail_blocks_radius ) ) {
+	$guardrail_blocks_style .= 'border-radius:' . esc_attr( $guardrail_blocks_radius ) . ';';
+} elseif ( is_array( $guardrail_blocks_radius ) ) {
+	$guardrail_blocks_corners = array(
+		'topLeft'     => 'border-top-left-radius',
+		'topRight'    => 'border-top-right-radius',
+		'bottomLeft'  => 'border-bottom-left-radius',
+		'bottomRight' => 'border-bottom-right-radius',
+	);
+
+	foreach ( $guardrail_blocks_corners as $guardrail_blocks_corner => $guardrail_blocks_prop ) {
+		if ( ! empty( $guardrail_blocks_radius[ $guardrail_blocks_corner ] ) ) {
+			$guardrail_blocks_style .= $guardrail_blocks_prop . ':' . esc_attr( (string) $guardrail_blocks_radius[ $guardrail_blocks_corner ] ) . ';';
+		}
+	}
+}
+
 $guardrail_blocks_wrapper = get_block_wrapper_attributes(
 	array(
 		'class' => 'full' === $guardrail_blocks_width ? 'ab-button--full' : '',

@@ -11,10 +11,6 @@
  */
 
 .wp-block-guardrail-blocks-button {
-	// Default radius lives on the wrapper so the core border-radius support
-	// (which styles the wrapper) overrides it naturally; the visible button
-	// inherits whichever wins. The wrapper itself paints nothing.
-	border-radius: 0.25em;
 
 	.ab-button {
 		display: inline-flex;
@@ -25,7 +21,11 @@
 		min-width: 44px;
 		padding: 0.6em 1.4em;
 		border: none;
-		border-radius: inherit;
+		// Default only. An author-chosen radius (core border support with
+		// skip-serialization) is applied inline on this element by
+		// render.php/edit.tsx, so it beats theme wp-element-button rules in
+		// both the editor and the front end regardless of cascade order.
+		border-radius: 0.25em;
 		text-decoration: none;
 		cursor: pointer;
 		line-height: 1.2;

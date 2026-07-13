@@ -32,7 +32,8 @@
 		"html": false,
 		"color": false,
 		"__experimentalBorder": {
-			"radius": true
+			"radius": true,
+			"__experimentalSkipSerialization": true
 		},
 		"typography": {
 			"fontSize": true

@@ -48,7 +48,47 @@ export type ButtonAttributes = {
 	url: string;
 	backgroundSlug: string;
 	width: 'auto' | 'full';
+	// Support-managed style object (border support with skip-serialization:
+	// we apply the radius to the visible element ourselves).
+	style?: {
+		border?: {
+			radius?: string | Record< string, string >;
+		};
+	};
 };
+
+/**
+ * CSS properties for an author-chosen border radius (uniform string or
+ * per-corner object). Applied inline on the visible button so it wins over
+ * theme `wp-element-button` rules in any cascade order — matching what
+ * render.php emits on the front end.
+ *
+ * @param radius The border support's radius value.
+ */
+function radiusStyle(
+	radius?: string | Record< string, string >
+): Record< string, string > | undefined {
+	if ( typeof radius === 'string' && radius !== '' ) {
+		return { borderRadius: radius };
+	}
+
+	if ( radius && typeof radius === 'object' ) {
+		const corners: Record< string, string > = {};
+		for ( const [ key, prop ] of [
+			[ 'topLeft', 'borderTopLeftRadius' ],
+			[ 'topRight', 'borderTopRightRadius' ],
+			[ 'bottomLeft', 'borderBottomLeftRadius' ],
+			[ 'bottomRight', 'borderBottomRightRadius' ],
+		] as const ) {
+			if ( radius[ key ] ) {
+				corners[ prop ] = radius[ key ];
+			}
+		}
+		return Object.keys( corners ).length > 0 ? corners : undefined;
+	}
+
+	return undefined;
+}
 
 /**
  * Normalize the (possibly origin-grouped) palette setting into a flat list.
@@ -113,13 +153,15 @@ export default function Edit( {
 
 	// Only preview colors the engine verified — an unverifiable selection
 	// must not render a misleading (possibly failing) pairing.
-	const buttonStyle =
-		background && pairing
+	const buttonStyle = {
+		...( background && pairing
 			? {
 					backgroundColor: background.color,
 					color: pairing.foreground.color,
 			  }
-			: undefined;
+			: undefined ),
+		...radiusStyle( attributes.style?.border?.radius ),
+	};
 
 	const contrastStatus = pairing
 		? sprintf(
